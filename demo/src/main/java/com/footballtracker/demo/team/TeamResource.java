@@ -2,6 +2,7 @@ package com.footballtracker.demo.team;
 
 import com.footballtracker.demo.errorhandling.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class TeamResource {
     }
 
     @GetMapping("/teams")
-    public List<Team> retrieveAllTeams() {
+    public ResponseEntity<List<Team>> retrieveAllTeams() {
         List<Team> allTeams = teamRepository.findAll();
 
         if (allTeams.isEmpty()) {
@@ -26,7 +27,12 @@ public class TeamResource {
             throw new UserNotFoundException(message);
         }
 
-        return teamRepository.findAll();
+        return ResponseEntity.ok().body(allTeams);
     }
+
+//    @GetMapping("/leaguetable")
+//    public List<Team> retrieveLeagueTable() {
+//
+//    }
 
 }

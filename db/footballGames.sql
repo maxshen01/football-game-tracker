@@ -13,6 +13,7 @@ CREATE TABLE results (
     home_team_goals INT CHECK (home_team_goals >= 0),
     away_team_goals INT CHECK (away_team_goals >= 0),
     result VARCHAR(255) NOT NULL,
+    result_date date not null,
     FOREIGN KEY (home_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
     FOREIGN KEY (away_team_id) REFERENCES teams(team_id) ON DELETE CASCADE
 );
@@ -41,61 +42,60 @@ INSERT INTO teams (team_name) VALUES
 ('Bristol City'); -- Added a placeholder to make 20
 
 
--- Insert 60 games (6 games per team)
--- We'll distribute matches roughly randomly; each team appears in 6 games.
-INSERT INTO results (home_team_id, away_team_id, home_team_goals, away_team_goals, result) VALUES
-(1, 2, 2, 1, 'Home Win'),
-(3, 4, 1, 1, 'Draw'),
-(5, 6, 0, 3, 'Away Win'),
-(7, 8, 2, 2, 'Draw'),
-(9, 10, 1, 0, 'Home Win'),
-(11, 12, 0, 2, 'Away Win'),
+INSERT INTO results (home_team_id, away_team_id, home_team_goals, away_team_goals, result, result_date) VALUES
+-- Round 1 (6 weeks ago)
+(1, 2, 2, 1, 'Home Win', CURRENT_DATE - INTERVAL '42 days'),
+(3, 4, 1, 1, 'Draw', CURRENT_DATE - INTERVAL '42 days'),
+(5, 6, 0, 3, 'Away Win', CURRENT_DATE - INTERVAL '42 days'),
+(7, 8, 2, 2, 'Draw', CURRENT_DATE - INTERVAL '42 days'),
+(9, 10, 1, 0, 'Home Win', CURRENT_DATE - INTERVAL '42 days'),
+(11, 12, 0, 2, 'Away Win', CURRENT_DATE - INTERVAL '42 days'),
 
-(13, 14, 3, 1, 'Home Win'),
-(15, 16, 1, 1, 'Draw'),
-(17, 18, 0, 0, 'Draw'),
-(19, 20, 2, 3, 'Away Win'),
-(1, 3, 1, 0, 'Home Win'),
-(2, 4, 0, 2, 'Away Win'),
+-- Round 2 (5 weeks ago)
+(13, 14, 3, 1, 'Home Win', CURRENT_DATE - INTERVAL '35 days'),
+(15, 16, 1, 1, 'Draw', CURRENT_DATE - INTERVAL '35 days'),
+(17, 18, 0, 0, 'Draw', CURRENT_DATE - INTERVAL '35 days'),
+(19, 20, 2, 3, 'Away Win', CURRENT_DATE - INTERVAL '35 days'),
+(1, 3, 1, 0, 'Home Win', CURRENT_DATE - INTERVAL '35 days'),
+(2, 4, 0, 2, 'Away Win', CURRENT_DATE - INTERVAL '35 days'),
 
-(5, 7, 2, 0, 'Home Win'),
-(6, 8, 1, 1, 'Draw'),
-(9, 11, 0, 2, 'Away Win'),
-(10, 12, 3, 2, 'Home Win'),
-(13, 15, 1, 0, 'Home Win'),
-(14, 16, 0, 1, 'Away Win'),
+-- Round 3 (4 weeks ago)
+(5, 7, 2, 0, 'Home Win', CURRENT_DATE - INTERVAL '28 days'),
+(6, 8, 1, 1, 'Draw', CURRENT_DATE - INTERVAL '28 days'),
+(9, 11, 0, 2, 'Away Win', CURRENT_DATE - INTERVAL '28 days'),
+(10, 12, 3, 2, 'Home Win', CURRENT_DATE - INTERVAL '28 days'),
+(13, 15, 1, 0, 'Home Win', CURRENT_DATE - INTERVAL '28 days'),
+(14, 16, 0, 1, 'Away Win', CURRENT_DATE - INTERVAL '28 days'),
 
-(17, 19, 2, 2, 'Draw'),
-(18, 20, 1, 0, 'Home Win'),
-(1, 5, 0, 1, 'Away Win'),
-(2, 6, 3, 1, 'Home Win'),
-(3, 7, 2, 2, 'Draw'),
-(4, 8, 0, 0, 'Draw'),
+-- Round 4 (3 weeks ago)
+(17, 19, 2, 2, 'Draw', CURRENT_DATE - INTERVAL '21 days'),
+(18, 20, 1, 0, 'Home Win', CURRENT_DATE - INTERVAL '21 days'),
+(1, 5, 0, 1, 'Away Win', CURRENT_DATE - INTERVAL '21 days'),
+(2, 6, 3, 1, 'Home Win', CURRENT_DATE - INTERVAL '21 days'),
+(3, 7, 2, 2, 'Draw', CURRENT_DATE - INTERVAL '21 days'),
+(4, 8, 0, 0, 'Draw', CURRENT_DATE - INTERVAL '21 days'),
 
-(9, 13, 1, 1, 'Draw'),
-(10, 14, 2, 0, 'Home Win'),
-(11, 15, 0, 1, 'Away Win'),
-(12, 16, 1, 2, 'Away Win'),
-(17, 1, 2, 1, 'Home Win'),
-(18, 2, 0, 3, 'Away Win'),
+-- Round 5 (2 weeks ago)
+(9, 13, 1, 1, 'Draw', CURRENT_DATE - INTERVAL '14 days'),
+(10, 14, 2, 0, 'Home Win', CURRENT_DATE - INTERVAL '14 days'),
+(11, 15, 0, 1, 'Away Win', CURRENT_DATE - INTERVAL '14 days'),
+(12, 16, 1, 2, 'Away Win', CURRENT_DATE - INTERVAL '14 days'),
+(17, 1, 2, 1, 'Home Win', CURRENT_DATE - INTERVAL '14 days'),
+(18, 2, 0, 3, 'Away Win', CURRENT_DATE - INTERVAL '14 days'),
 
-(3, 9, 1, 2, 'Away Win'),
-(4, 10, 0, 0, 'Draw'),
-(5, 11, 3, 1, 'Home Win'),
-(6, 12, 2, 2, 'Draw'),
-(7, 13, 0, 1, 'Away Win'),
-(8, 14, 1, 0, 'Home Win'),
+-- Round 6 (last weekend)
+(3, 9, 1, 2, 'Away Win', CURRENT_DATE - INTERVAL '7 days'),
+(4, 10, 0, 0, 'Draw', CURRENT_DATE - INTERVAL '7 days'),
+(5, 11, 3, 1, 'Home Win', CURRENT_DATE - INTERVAL '7 days'),
+(6, 12, 2, 2, 'Draw', CURRENT_DATE - INTERVAL '7 days'),
+(7, 13, 0, 1, 'Away Win', CURRENT_DATE - INTERVAL '7 days'),
+(8, 14, 1, 0, 'Home Win', CURRENT_DATE - INTERVAL '7 days'),
 
-(15, 19, 2, 1, 'Home Win'),
-(16, 20, 0, 0, 'Draw'),
-(17, 3, 1, 2, 'Away Win'),
-(18, 4, 0, 1, 'Away Win'),
-(1, 6, 3, 0, 'Home Win'),
-(2, 5, 1, 1, 'Draw'),
+-- Extra matches if needed
+(15, 19, 2, 1, 'Home Win', CURRENT_DATE - INTERVAL '7 days'),
+(16, 20, 0, 0, 'Draw', CURRENT_DATE - INTERVAL '7 days'),
+(17, 3, 1, 2, 'Away Win', CURRENT_DATE - INTERVAL '7 days'),
+(18, 4, 0, 1, 'Away Win', CURRENT_DATE - INTERVAL '7 days'),
+(1, 6, 3, 0, 'Home Win', CURRENT_DATE - INTERVAL '7 days'),
+(2, 5, 1, 1, 'Draw', CURRENT_DATE - INTERVAL '7 days');
 
-(7, 9, 0, 2, 'Away Win'),
-(8, 10, 2, 0, 'Home Win'),
-(11, 13, 1, 1, 'Draw'),
-(12, 14, 0, 3, 'Away Win'),
-(15, 1, 2, 2, 'Draw'),
-(16, 2, 1, 0, 'Home Win');
