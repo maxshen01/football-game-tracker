@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS results;
 DROP TABLE IF EXISTS teams;
 
 CREATE TABLE teams (
@@ -6,8 +6,8 @@ CREATE TABLE teams (
     team_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE games (
-    game_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+CREATE TABLE results (
+    result_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     home_team_id INT NOT NULL,
     away_team_id INT NOT NULL,
     home_team_goals INT CHECK (home_team_goals >= 0),
@@ -43,7 +43,7 @@ INSERT INTO teams (team_name) VALUES
 
 -- Insert 60 games (6 games per team)
 -- We'll distribute matches roughly randomly; each team appears in 6 games.
-INSERT INTO games (home_team_id, away_team_id, home_team_goals, away_team_goals, result) VALUES
+INSERT INTO results (home_team_id, away_team_id, home_team_goals, away_team_goals, result) VALUES
 (1, 2, 2, 1, 'Home Win'),
 (3, 4, 1, 1, 'Draw'),
 (5, 6, 0, 3, 'Away Win'),

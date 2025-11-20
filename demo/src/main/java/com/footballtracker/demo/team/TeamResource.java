@@ -1,10 +1,12 @@
 package com.footballtracker.demo.team;
 
+import com.footballtracker.demo.errorhandling.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TeamResource {
@@ -17,6 +19,13 @@ public class TeamResource {
 
     @GetMapping("/teams")
     public List<Team> retrieveAllTeams() {
+        List<Team> allTeams = teamRepository.findAll();
+
+        if (allTeams.isEmpty()) {
+            String message = String.format("No teams have been added to the database");
+            throw new UserNotFoundException(message);
+        }
+
         return teamRepository.findAll();
     }
 
