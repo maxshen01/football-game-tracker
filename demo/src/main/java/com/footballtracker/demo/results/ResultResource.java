@@ -22,6 +22,7 @@ public class ResultResource {
         this.resultRepository = resultRepository;
     }
 
+    //route to get all the results stored in the db
     @GetMapping("/results")
     public ResponseEntity<List<Result>> retrieveAllResults() {
         List<Result> allResults = resultRepository.findAll();
@@ -34,21 +35,17 @@ public class ResultResource {
         return ResponseEntity.ok().body(allResults);
     }
 
+    //route to get an ordered list of objects for the table.
     @GetMapping("/results/leaguetable")
-    public List<LeagueTable> retrieveLeagueTable() {
+    public ResponseEntity<List<LeagueTable>> retrieveLeagueTable() {
         List<LeagueTable> table = resultRepository.getLeagueTable();
-//
-//        ArrayList<LeagueTable> table = new ArrayList<LeagueTable>();
-//
-//        for (int i = 0; i < sqlOutput.size(); i++) {
-//            LeagueTable team = new LeagueTable();
-//
-//            team.setTeam_name(sqlOutput.get(i).getString("team_name"));
-//
-//            table.add(team);
-//        }
 
-        return table;
+        if (table.size() != 50) {
+            String message = String.format("The size of the table is incorrect");
+            throw new UserNotFoundException(message);
+        }
+
+        return ResponseEntity.ok(table);
     }
 
 }
