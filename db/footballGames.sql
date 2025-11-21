@@ -14,7 +14,6 @@ CREATE TABLE results (
     away_team_id INT NOT NULL,
     home_team_goals INT CHECK (home_team_goals >= 0),
     away_team_goals INT CHECK (away_team_goals >= 0),
-    --result match_result NOT NULL,
     result_date date not null,
     FOREIGN KEY (home_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
     FOREIGN KEY (away_team_id) REFERENCES teams(team_id) ON DELETE CASCADE
