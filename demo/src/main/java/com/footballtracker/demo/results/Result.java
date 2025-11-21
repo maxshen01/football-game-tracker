@@ -1,6 +1,8 @@
 package com.footballtracker.demo.results;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 
@@ -10,6 +12,7 @@ import java.time.LocalDate;
 public class Result {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int result_id;
 
     @Min(value = 1, message= "min id is 1")
@@ -26,9 +29,6 @@ public class Result {
     @Positive(message = "goals must be positive")
     private int away_team_goals;
 
-    @Size(min=4, message = "least number of letters for result is 4")
-    private String result;
-
     @Past(message = "The match date must be in the past")
     private LocalDate result_date;
 
@@ -36,12 +36,11 @@ public class Result {
 
     }
 
-    public Result(int away_team_id, int away_team_goals, int home_team_id, int home_team_goals, String result, LocalDate result_date, int result_id) {
+    public Result(int away_team_id, int away_team_goals, int home_team_id, int home_team_goals, LocalDate result_date, int result_id) {
         this.away_team_id = away_team_id;
         this.away_team_goals = away_team_goals;
         this.home_team_id = home_team_id;
         this.home_team_goals = home_team_goals;
-        this.result = result;
         this.result_date = result_date;
         this.result_id = result_id;
     }
@@ -78,14 +77,6 @@ public class Result {
         this.home_team_goals = home_team_goals;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     public LocalDate getResult_date() {
         return result_date;
     }
@@ -110,7 +101,6 @@ public class Result {
                 ", home_team_id=" + home_team_id +
                 ", home_team_goals=" + home_team_goals +
                 ", away_team_goals=" + away_team_goals +
-                ", result='" + result + '\'' +
                 ", result_date=" + result_date +
                 '}';
     }
