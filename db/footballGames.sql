@@ -1,6 +1,11 @@
+--Remove previous tables if needed
 DROP TABLE IF EXISTS results;
 DROP TABLE IF EXISTS teams;
 
+--create enumerated set for results, for faster processing
+create TYPE match_result AS ENUM ('Home Win', 'Draw', 'Away Win');
+
+--create the tables
 CREATE TABLE teams (
     team_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     team_name VARCHAR(255) NOT NULL
@@ -12,7 +17,7 @@ CREATE TABLE results (
     away_team_id INT NOT NULL,
     home_team_goals INT CHECK (home_team_goals >= 0),
     away_team_goals INT CHECK (away_team_goals >= 0),
-    result VARCHAR(255) NOT NULL,
+    result match_result NOT NULL,
     result_date date not null,
     FOREIGN KEY (home_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
     FOREIGN KEY (away_team_id) REFERENCES teams(team_id) ON DELETE CASCADE
@@ -41,7 +46,7 @@ INSERT INTO teams (team_name) VALUES
 ('Wolverhampton Wanderers'),
 ('Bristol City'); -- Added a placeholder to make 20
 
-
+--Insert rounds of games
 INSERT INTO results (home_team_id, away_team_id, home_team_goals, away_team_goals, result, result_date) VALUES
 -- Round 1 (6 weeks ago)
 (1, 2, 2, 1, 'Home Win', CURRENT_DATE - INTERVAL '42 days'),
