@@ -7,15 +7,13 @@ import com.footballtracker.demo.team.Team;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ResultResource {
@@ -65,6 +63,22 @@ public class ResultResource {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    //route to delete a result
+    @DeleteMapping("results/{id}")
+    public ResponseEntity<Result> deleteResult(@PathVariable int id) {
+
+        Optional<Result> resultToDelete = resultRepository.findById(id);
+
+        if(resultToDelete.isEmpty()) {
+            String message = String.format("No this result id doesn't exist");
+            throw new UserNotFoundException(message);
+        }
+
+        resultRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

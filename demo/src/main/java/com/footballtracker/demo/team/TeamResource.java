@@ -49,9 +49,4 @@ public class TeamResource {
         return ResponseEntity.ok().body(resultsForTeam);
     }
 
-//    @GetMapping("/leaguetable")
-//    public List<Team> retrieveLeagueTable() {
-//
-//    }
-
 }
