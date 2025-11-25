@@ -36,7 +36,7 @@ async function fillLeagueTable(e) {
                 //add link
                 const link = document.createElement("a")
                 link.textContent = value;
-                link.href = `team.html?team=${teamStats.team_id}`
+                link.href = `pages/team.html?team=${teamStats.team_id}`
 
                 cell.appendChild(link)
             } else {

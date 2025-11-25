@@ -10,3 +10,7 @@ body {
 .my_table th {
     text-align: center;
 }
+
+.card {
+    background-color: aqua;
+}
