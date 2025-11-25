@@ -1,0 +1,12 @@
+body {
+    background-color: blue;
+}
+
+.nav-link:hover {
+    background-color: lightgray;
+}
+
+.my_table td,
+.my_table th {
+    text-align: center;
+}
