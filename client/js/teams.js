@@ -1,9 +1,17 @@
+let onLocalHost = true;
+let apiBeginning;
+
+if (onLocalHost) {
+    apiBeginning = "http://localhost:8080"
+} else {
+    apiBeginning = "http://"
+}
+
+const titleArea = document.querySelector(".titleArea")
 const description = document.querySelector(".team_description")
 const resultsListHtml = document.querySelector(".results_list")
 
 document.addEventListener("DOMContentLoaded", getTeamId)
-//document.addEventListener("DOMContentLoaded", addImage)
-//document.addEventListener("DOMContentLoaded", addResults)
 
 //Get Team Id
 function getTeamId() {
@@ -24,7 +32,29 @@ function getTeamId() {
 
 //Add the title
 async function addTitle(team_id) {
-    console.log(team_id);
+    const title = document.createElement("h1")
+    const teamName = await getTeamName(team_id)
+
+    title.textContent = teamName.team_name
+    titleArea.appendChild(title)
+}
+
+//Get the team name
+async function getTeamName(team_id) {
+    try {
+        const respData = await fetch(`${apiBeginning}/teams/${team_id}`)
+        
+        if (respData.ok) {
+            teamName = await respData.json()
+        } else {
+            throw "Something went wrong with the API request"
+        }
+
+        return teamName
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 // Add the image 
@@ -37,6 +67,71 @@ function addImage(team_id) {
 }
 
 //Add the results
-function addResults(team_id) {
-    console.log(team_id);
+async function addResults(team_id) {
+    const teamResults = await getResults(team_id)
+    const teamsList = await getTeams()
+
+    const teamNameMap = Object.fromEntries(
+    teamsList.map(teamsList => [teamsList.team_id, teamsList.team_name])
+    );
+
+    //iterate through each result
+    for (let i=0; i<teamResults.length; i++) {
+        const result = teamResults[i]
+
+        const resultCard = createResultHtml(result, teamNameMap)
+
+        resultsListHtml.appendChild(resultCard)
+    }
+}
+
+function createResultHtml(result, teamNameMap) {
+    const card = document.createElement("div")
+    card.className = "card"
+
+    card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title ">${result.result_date}</h5>
+                        <div class="container-fluid d-flex gap-5">
+                        <p class="card-text">${teamNameMap[result.home_team_id]}</p>
+                        <p class="card-text">${result.home_team_goals}</p>
+                        <p class="card-text">${result.away_team_goals}</p>
+                        <p class="card-text">${teamNameMap[result.away_team_id]}</p>
+                    </div>
+    `
+    return card
+}
+
+async function getResults(team_id) {
+    try {
+        const respData = await fetch(`${apiBeginning}/teams/${team_id}/results`)
+        
+        if (respData.ok) {
+            teamResults = await respData.json()
+        } else {
+            throw "Something went wrong with the API request"
+        }
+
+        return teamResults
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function getTeams() {
+    try {
+        const respData = await fetch(`${apiBeginning}/teams`)
+        
+        if (respData.ok) {
+            teamsList = await respData.json()
+        } else {
+            throw "Something went wrong with the API request"
+        }
+
+        return teamsList
+
+    } catch (err) {
+        console.log(err);
+    }
 }
