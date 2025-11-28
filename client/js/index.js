@@ -30,9 +30,20 @@ async function fillLeagueTable(e) {
                 continue
             } 
 
-            const cell = document.createElement("td");
+            const cell = document.createElement("td");  
 
-            cell.textContent = value;
+            if (key === "team_name") {
+                //add link
+                const link = document.createElement("a")
+                link.textContent = value;
+                link.href = `pages/team.html?team=${teamStats.team_id}`
+
+                cell.appendChild(link)
+            } else {
+                cell.textContent = value
+            }
+
+            //cell.textContent = value;
             row.appendChild(cell);
         }
 

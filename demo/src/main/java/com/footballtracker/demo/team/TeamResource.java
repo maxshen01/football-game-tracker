@@ -38,6 +38,18 @@ public class TeamResource {
         return ResponseEntity.ok().body(allTeams);
     }
 
+    @GetMapping("/teams/{id}")
+    public Team retrieveTeamById(@PathVariable int id) {
+        Optional<Team> teamName = teamRepository.findById(id);
+
+        if (teamName.isEmpty()) {
+            String message = String.format("A team with this id does not exist");
+            throw new UserNotFoundException(message);
+        }
+
+        return teamName.get();
+    }
+
     //Get all the results of a specific team by id
     @GetMapping("/teams/{id}/results")
     public ResponseEntity<List<Result>> retreiveTeamResultsById(@PathVariable int id) {
