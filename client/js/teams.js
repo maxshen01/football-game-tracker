@@ -11,10 +11,10 @@ const titleArea = document.querySelector(".titleArea")
 const description = document.querySelector(".team_description")
 const resultsListHtml = document.querySelector(".results_list")
 
-document.addEventListener("DOMContentLoaded", getTeamId)
+document.addEventListener("DOMContentLoaded", initPage)
 
-//Get Team Id
-function getTeamId() {
+//Initialise the page
+function initPage() {
     // Get the query string from the current URL
     const queryString = window.location.search;
 
@@ -39,28 +39,11 @@ async function addTitle(team_id) {
     titleArea.appendChild(title)
 }
 
-//Get the team name
-async function getTeamName(team_id) {
-    try {
-        const respData = await fetch(`${apiBeginning}/teams/${team_id}`)
-        
-        if (respData.ok) {
-            teamName = await respData.json()
-        } else {
-            throw "Something went wrong with the API request"
-        }
-
-        return teamName
-
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 // Add the image 
 async function addImage(team_id) {
     const imageHtml = document.createElement("img")
     const teamName = await getTeamName(team_id)
+    
     imageHtml.src = `../assets/team_images/${team_id}.jpg`
     imageHtml.alt = teamName.team_name
 
@@ -80,26 +63,18 @@ async function addResults(team_id) {
     for (let i=0; i<teamResults.length; i++) {
         const result = teamResults[i]
 
-        const resultCard = createResultHtml(result, teamNameMap)
+        const resultCard = renderResultCard(result, teamNameMap)
 
         resultsListHtml.appendChild(resultCard)
     }
 }
 
-function createResultHtml(result, teamNameMap) {
+//helper functions
+function renderResultCard(result, teamNameMap) {
     const card = document.createElement("div")
     card.className = "card"
 
-    const date = new Date(result.result_date);
-    
-    dateDisp = date.toLocaleDateString("en-GB", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-        })
-
-    console.log(dateDisp);
+    const dateDisp = formatDate(result.result_date)
 
     card.innerHTML = `
                     <div class="card-body">
@@ -114,36 +89,47 @@ function createResultHtml(result, teamNameMap) {
     return card
 }
 
-async function getResults(team_id) {
-    try {
-        const respData = await fetch(`${apiBeginning}/teams/${team_id}/results`)
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    
+    const dateDisp = date.toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+        }).replace(",", "")
+    
+    return dateDisp
+}
+
+
+//API Calls
+async function apiFetch(url) {
+  try {
+        const respData = await fetch(url);
+        let apiObject
         
         if (respData.ok) {
-            teamResults = await respData.json()
+            apiObject = await respData.json()
         } else {
             throw "Something went wrong with the API request"
         }
 
-        return teamResults
+        return apiObject
 
     } catch (err) {
         console.log(err);
     }
 }
 
+async function getTeamName(team_id) {
+    return await apiFetch(`${apiBeginning}/teams/${team_id}`);
+}
+
 async function getTeams() {
-    try {
-        const respData = await fetch(`${apiBeginning}/teams`)
-        
-        if (respData.ok) {
-            teamsList = await respData.json()
-        } else {
-            throw "Something went wrong with the API request"
-        }
+    return await apiFetch(`${apiBeginning}/teams`);
+}
 
-        return teamsList
-
-    } catch (err) {
-        console.log(err);
-    }
+async function getResults(team_id) {
+    return await apiFetch(`${apiBeginning}/teams/${team_id}/results`);
 }
