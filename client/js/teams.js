@@ -58,10 +58,11 @@ async function getTeamName(team_id) {
 }
 
 // Add the image 
-function addImage(team_id) {
+async function addImage(team_id) {
     const imageHtml = document.createElement("img")
+    const teamName = await getTeamName(team_id)
     imageHtml.src = `../assets/team_images/${team_id}.jpg`
-    imageHtml.alt = "Arsenal"
+    imageHtml.alt = teamName.team_name
 
     description.appendChild(imageHtml)
 }
