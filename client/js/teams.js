@@ -90,9 +90,20 @@ function createResultHtml(result, teamNameMap) {
     const card = document.createElement("div")
     card.className = "card"
 
+    const date = new Date(result.result_date);
+    
+    dateDisp = date.toLocaleDateString("en-GB", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+        })
+
+    console.log(dateDisp);
+
     card.innerHTML = `
                     <div class="card-body">
-                        <h5 class="card-title ">${result.result_date}</h5>
+                        <h5 class="card-title ">${dateDisp}</h5>
                         <div class="container-fluid d-flex gap-5">
                         <p class="card-text">${teamNameMap[result.home_team_id]}</p>
                         <p class="card-text">${result.home_team_goals}</p>
