@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add a result</title>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <script defer src="../js/createResult.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
     <header>
@@ -11,7 +16,7 @@
         <p>Add any results to the league, to update the league table</p>
     </header>
     
-    <form style="background-color: aqua;">
+    <form>
         <div class="form-group">
             <label for="date">Select a date:</label>
             <input type="date" id="resultDate" value="2025-11-28" required>
@@ -19,19 +24,19 @@
             <label for="homeTeamName">Home team:</label>
             <select class="form-control" id="homeTeamName" name="homeTeamName" required>
                 <option value="" disabled selected>Select a team</option>
-                <option value="1">Arsenal</option>
+                <!-- <option value="1">Arsenal</option>
                 <option value="13">Manchester United</option>
                 <option value="12">Manchester City</option>
-                <option value="10">Liverpool</option>
+                <option value="10">Liverpool</option> -->
             </select>
 
             <label for="awayTeamName">Away team:</label>
             <select class="form-control" id="awayTeamName" name="awayTeamName" required>
-                <option value="" disabled selected>Select a team</option>
+                <!-- <option value="" disabled selected>Select a team</option>
                 <option value="1">Arsenal</option>
                 <option value="13">Manchester United</option>
                 <option value="12">Manchester City</option>
-                <option value="10">Liverpool</option>
+                <option value="10">Liverpool</option> -->
             </select>
 
             <label for="homeTeamGoals">Home Team Goals:</label>
@@ -43,5 +48,9 @@
             <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
         </div>
     </form>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>
 </html>
