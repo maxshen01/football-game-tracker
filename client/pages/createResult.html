@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a result</title>
+</head>
+<body>
+    <header>
+        <h1>Add a result</h1>
+        <p>Add any results to the league, to update the league table</p>
+    </header>
+    
+    <form style="background-color: aqua;">
+        <div class="form-group">
+            <label for="date">Select a date:</label>
+            <input type="date" id="resultDate" value="2025-11-28" required>
+
+            <label for="homeTeamName">Home team:</label>
+            <select class="form-control" id="homeTeamName" name="homeTeamName" required>
+                <option value="" disabled selected>Select a team</option>
+                <option value="1">Arsenal</option>
+                <option value="13">Manchester United</option>
+                <option value="12">Manchester City</option>
+                <option value="10">Liverpool</option>
+            </select>
+
+            <label for="awayTeamName">Away team:</label>
+            <select class="form-control" id="awayTeamName" name="awayTeamName" required>
+                <option value="" disabled selected>Select a team</option>
+                <option value="1">Arsenal</option>
+                <option value="13">Manchester United</option>
+                <option value="12">Manchester City</option>
+                <option value="10">Liverpool</option>
+            </select>
+
+            <label for="homeTeamGoals">Home Team Goals:</label>
+            <input type="number" id="homeTeamGoals" required>
+
+            <label for="awayTeamGoals">Away Team Goals:</label>
+            <input type="number" id="awayTeamGoals" required>
+
+            <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+        </div>
+    </form>
+</body>
+</html>
