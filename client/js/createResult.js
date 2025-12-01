@@ -11,6 +11,7 @@ const homeTeamSelection = document.querySelector("#homeTeamName")
 const awayTeamSelection = document.querySelector("#awayTeamName")
 
 document.addEventListener("DOMContentLoaded", initPage)
+document.addEventListener("submit", getNewResult)
 
 async function initPage() {
     const teamsList = await getTeams()
@@ -19,6 +20,7 @@ async function initPage() {
 }
 
 async function addTeams(teamsList) {
+
     // Clear existing options
     homeTeamSelection.innerHTML = '';
     awayTeamSelection.innerHTML = '';
@@ -52,6 +54,29 @@ async function addTeams(teamsList) {
 
         awayTeamSelection.appendChild(awayOption)
     }
+}
+
+async function getNewResult(e) {
+    e.preventDefault();
+    const clientObject = e.target
+    
+    const newResult = {
+        result_date: clientObject[0].value,
+        home_team_id: parseInt(clientObject[1].value),
+        home_team_goals: parseInt(clientObject[2].value),
+        away_team_id: parseInt(clientObject[3].value),
+        away_team_goals: parseInt(clientObject[4].value)
+    }
+
+    const options = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newResult)
+    }
+
+    await fetch(`${apiBeginning}/results`, options)
 }
 
 //API Calls

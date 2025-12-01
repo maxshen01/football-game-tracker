@@ -23,10 +23,10 @@ public class Result {
     @Max(value = 20, message = "max id is 20")
     private int away_team_id;
 
-    @Positive(message = "goals must be positive")
+    @Min(value = 0, message = "goals cannot be negative")
     private int home_team_goals;
 
-    @Positive(message = "goals must be positive")
+    @Min(value = 0, message = "goals cannot be negative")
     private int away_team_goals;
 
     @Past(message = "The match date must be in the past")
