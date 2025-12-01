@@ -2,16 +2,16 @@ let onLocalHost = true;
 let apiBeginning;
 
 if (onLocalHost) {
-    apiBeginning = "http://localhost:8080"
+    apiBeginning = "http://localhost:8080";
 } else {
-    apiBeginning = "http://"
+    apiBeginning = "http://";
 }
 
-const titleArea = document.querySelector(".titleArea")
-const description = document.querySelector(".team_description")
-const resultsListHtml = document.querySelector(".results_list")
+const titleArea = document.querySelector(".titleArea");
+const description = document.querySelector(".team_description");
+const resultsListHtml = document.querySelector(".results_list");
 
-document.addEventListener("DOMContentLoaded", initPage)
+document.addEventListener("DOMContentLoaded", initPage);
 
 //Initialise the page
 function initPage() {
@@ -22,101 +22,105 @@ function initPage() {
     const urlParams = new URLSearchParams(queryString);
 
     // Get the value of the 'team' parameter
-    const teamId = urlParams.get('team');
+    const teamId = urlParams.get("team");
 
     //Load the required Elements
-    addTitle(teamId)
-    addImage(teamId)
-    addResults(teamId)
+    addTitle(teamId);
+    addImage(teamId);
+    addResults(teamId);
 }
 
 //Add the title
 async function addTitle(team_id) {
-    const title = document.createElement("h1")
-    const teamName = await getTeamName(team_id)
+    const title = document.createElement("h1");
+    const teamName = await getTeamName(team_id);
 
-    title.textContent = teamName.team_name
-    titleArea.appendChild(title)
+    title.textContent = teamName.team_name;
+    titleArea.appendChild(title);
 }
 
-// Add the image 
+// Add the image
 async function addImage(team_id) {
-    const imageHtml = document.createElement("img")
-    const teamName = await getTeamName(team_id)
-    
-    imageHtml.src = `../assets/team_images/${team_id}.jpg`
-    imageHtml.alt = teamName.team_name
+    const imageHtml = document.createElement("img");
+    const teamName = await getTeamName(team_id);
 
-    description.appendChild(imageHtml)
+    imageHtml.src = `../assets/team_images/${team_id}.jpg`;
+    imageHtml.alt = teamName.team_name;
+
+    description.appendChild(imageHtml);
 }
 
 //Add the results
 async function addResults(team_id) {
-    const teamResults = await getResults(team_id)
-    const teamsList = await getTeams()
+    const teamResults = await getResults(team_id);
+    const teamsList = await getTeams();
 
     const teamNameMap = Object.fromEntries(
-    teamsList.map(teamsList => [teamsList.team_id, teamsList.team_name])
+        teamsList.map((teamsList) => [teamsList.team_id, teamsList.team_name])
     );
 
     //iterate through each result
-    for (let i=0; i<teamResults.length; i++) {
-        const result = teamResults[i]
+    for (let i = 0; i < teamResults.length; i++) {
+        const result = teamResults[i];
 
-        const resultCard = renderResultCard(result, teamNameMap)
+        const resultCard = renderResultCard(result, teamNameMap);
 
-        resultsListHtml.appendChild(resultCard)
+        resultsListHtml.appendChild(resultCard);
     }
 }
 
 //helper functions
 function renderResultCard(result, teamNameMap) {
-    const card = document.createElement("div")
-    card.className = "card"
+    const card = document.createElement("div");
+    card.className = "card";
 
-    const dateDisp = formatDate(result.result_date)
+    const dateDisp = formatDate(result.result_date);
 
     card.innerHTML = `
                     <div class="card-body">
                         <h5 class="card-title ">${dateDisp}</h5>
                         <div class="container-fluid d-flex gap-5">
-                        <p class="card-text">${teamNameMap[result.home_team_id]}</p>
+                        <p class="card-text">${
+                            teamNameMap[result.home_team_id]
+                        }</p>
                         <p class="card-text">${result.home_team_goals}</p>
                         <p class="card-text">${result.away_team_goals}</p>
-                        <p class="card-text">${teamNameMap[result.away_team_id]}</p>
+                        <p class="card-text">${
+                            teamNameMap[result.away_team_id]
+                        }</p>
                     </div>
-    `
-    return card
+    `;
+    return card;
 }
 
 function formatDate(dateString) {
     const date = new Date(dateString);
-    
-    const dateDisp = date.toLocaleDateString("en-GB", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-        }).replace(",", "")
-    
-    return dateDisp
-}
 
+    const dateDisp = date
+        .toLocaleDateString("en-GB", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        })
+        .replace(",", "");
+
+    return dateDisp;
+}
 
 //API Calls
 async function apiFetch(url) {
-  try {
+    try {
         const respData = await fetch(url);
-        let apiObject
-        
+        let apiObject;
+
         if (respData.ok) {
-            apiObject = await respData.json()
+            apiObject = await respData.json();
         } else {
-            throw "Something went wrong with the API request"
+            throw "Something went wrong with the API request";
         }
 
-        return apiObject
-
+        return apiObject;
     } catch (err) {
         console.log(err);
     }
