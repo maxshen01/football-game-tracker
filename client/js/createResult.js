@@ -19,7 +19,24 @@ async function initPage() {
 }
 
 async function addTeams(teamsList) {
-    
+    // Clear existing options
+    homeTeamSelection.innerHTML = '';
+    awayTeamSelection.innerHTML = '';
+
+    // Add placeholder to both
+    const placeholder = (label) => {
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.disabled = true;
+        opt.selected = true;
+        opt.textContent = label;
+        return opt;
+    };
+
+    homeTeamSelection.appendChild(placeholder("Select a team"));
+    awayTeamSelection.appendChild(placeholder("Select a team"));
+
+    //Add new teams
     for (let i=0; i< teamsList.length; i++) {
         const teamObject = teamsList[i]
 
