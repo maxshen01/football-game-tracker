@@ -1,13 +1,4 @@
-let apiBeginning;
-const isLocalHost =
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1";
-
-if (isLocalHost) {
-    apiBeginning = "http://localhost:8080";
-} else {
-    apiBeginning = "http://";
-}
+import { getTeams, createResult } from "./apiHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
@@ -130,16 +121,8 @@ async function getNewResult(e) {
         away_team_goals: awayGoals,
     };
 
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newResult),
-    };
-
     try {
-        const response = await fetch(`${apiBeginning}/results`, options);
+        const response = await createResult(newResult);
 
         if (response.ok) {
             alert("Result Submitted Successfully");
@@ -161,28 +144,4 @@ async function getNewResult(e) {
         console.log(err);
         alert("There was a network error");
     }
-    await fetch(`${apiBeginning}/results`, options);
-}
-
-//API Calls
-async function apiFetch(url) {
-    try {
-        const respData = await fetch(url);
-        let apiObject;
-
-        if (respData.ok) {
-            apiObject = await respData.json();
-        } else {
-            throw "Something went wrong with the API request";
-        }
-
-        return apiObject;
-    } catch (err) {
-        console.log(err);
-        throw err;
-    }
-}
-
-async function getTeams() {
-    return await apiFetch(`${apiBeginning}/teams`);
 }

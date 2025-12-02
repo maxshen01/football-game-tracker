@@ -1,11 +1,4 @@
-let onLocalHost = true;
-let apiBeginning;
-
-if (onLocalHost) {
-    apiBeginning = "http://localhost:8080";
-} else {
-    apiBeginning = "http://";
-}
+import { getTeamName, getTeams, getResults } from "./apiHelpers.js";
 
 const titleArea = document.querySelector(".titleArea");
 const description = document.querySelector(".team_description");
@@ -106,34 +99,4 @@ function formatDate(dateString) {
         .replace(",", "");
 
     return dateDisp;
-}
-
-//API Calls
-async function apiFetch(url) {
-    try {
-        const respData = await fetch(url);
-        let apiObject;
-
-        if (respData.ok) {
-            apiObject = await respData.json();
-        } else {
-            throw "Something went wrong with the API request";
-        }
-
-        return apiObject;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-async function getTeamName(team_id) {
-    return await apiFetch(`${apiBeginning}/teams/${team_id}`);
-}
-
-async function getTeams() {
-    return await apiFetch(`${apiBeginning}/teams`);
-}
-
-async function getResults(team_id) {
-    return await apiFetch(`${apiBeginning}/teams/${team_id}/results`);
 }

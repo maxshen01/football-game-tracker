@@ -1,11 +1,4 @@
-let onLocalHost = true;
-let apiBeginning;
-
-if (onLocalHost) {
-    apiBeginning = "http://localhost:8080";
-} else {
-    apiBeginning = "http://";
-}
+import { getLeagueTable } from "./apiHelpers.js";
 
 const leagueTableHtml = document.querySelector(".league-table");
 
@@ -15,7 +8,7 @@ document.addEventListener("DOMContentLoaded", fillLeagueTable);
 async function fillLeagueTable(e) {
     //get the right object
 
-    leagueTableList = await getLeagueTable();
+    const leagueTableList = await getLeagueTable();
 
     //iterate through league table to get items
     for (let i = 0; i < leagueTableList.length; i++) {
@@ -46,23 +39,5 @@ async function fillLeagueTable(e) {
         }
 
         leagueTableHtml.appendChild(row);
-    }
-}
-
-//get the league table object from the backend
-async function getLeagueTable() {
-    try {
-        const respData = await fetch(`${apiBeginning}/results/leaguetable`);
-        let leagueTableList;
-
-        if (respData.ok) {
-            leagueTableList = await respData.json();
-        } else {
-            throw "Something went wrong with the API request";
-        }
-
-        return leagueTableList;
-    } catch (err) {
-        console.log(err);
     }
 }
