@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add a result</title>
+
+        <link rel="stylesheet" href="../css/main.css" />
+        <script type="module" src="../js/createResult.js"></script>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>Add a result</h1>
+            <p>Add any results to the league, to update the league table</p>
+        </header>
+
+        <form class="createResultForm">
+            <div class="form-group bg-body-secondary container">
+                <div class="form-row">
+                    <div class="form-label">
+                        <label for="date" class="form label"
+                            >Select a date:</label
+                        >
+                    </div>
+                    <div class="form-input">
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="resultDate"
+                            value="2025-11-28"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-column">
+                        <label for="homeTeamName">Home team:</label>
+                        <select
+                            class="form-control"
+                            id="homeTeamName"
+                            name="homeTeamName"
+                            required
+                        ></select>
+                        <label for="homeTeamGoals">Home Team Goals:</label>
+                        <input type="number" id="homeTeamGoals" required />
+                    </div>
+
+                    <div class="form-column">
+                        <label for="awayTeamName">Away team:</label>
+                        <select
+                            class="form-control"
+                            id="awayTeamName"
+                            name="awayTeamName"
+                            required
+                        ></select>
+                        <label for="awayTeamGoals">Away Team Goals:</label>
+                        <input type="number" id="awayTeamGoals" required />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="btn btn-primary mb-2">
+                        Submit Result
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+            integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
