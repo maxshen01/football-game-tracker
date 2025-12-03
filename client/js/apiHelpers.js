@@ -65,3 +65,26 @@ export async function createResult(resultData) {
         throw err;
     }
 }
+
+export async function deleteResultApi(resultId) {
+    try {
+        const options = {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+        };
+
+        const response = await fetch(
+            `${apiBeginning}/results/${resultId}`,
+            options
+        );
+
+        if (!response) {
+            throw "Something went wrong with the API request";
+        }
+
+        return response;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}

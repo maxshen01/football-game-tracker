@@ -39,7 +39,7 @@ body {
     justify-content: center;
 }
 
-.delete_results_list .results_list {
+.delete_results_list .results {
     display: flex;
     flex-direction: column;
     align-items: center;
