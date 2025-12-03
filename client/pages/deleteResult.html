@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Delete a Result</title>
+
+        <link rel="stylesheet" href="../css/main.css" />
+        <script type="module" src="../js/deleteResult.js"></script>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>Delete results</h1>
+            <p>
+                This is the page to delete any results. To delete a result,
+                select one of the teams partaking in the result, and select the
+                correct game, then delete it.
+            </p>
+        </header>
+
+        <main>
+            <form class="deleteResultForm">
+                <div class="form-group bg-body-secondary container">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="deleteTeam">Team 1:</label>
+                            <select
+                                class="form-control"
+                                id="deleteTeam"
+                                name="deleteTeam"
+                                required
+                            >
+                                <option value="" selected disabled>
+                                    Select a team
+                                </option>
+                                <option value="1">Manchester United</option>
+                                <option value="2">Arsenal</option>
+                                <option value="3">Liverpool</option>
+                                <option value="4">Manchester City</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-column">
+                            <label for="awayTeamName">Away team:</label>
+                            <select
+                                class="form-control"
+                                id="awayTeamName"
+                                name="awayTeamName"
+                                required
+                            ></select>
+                        </div>
+                    </div> -->
+
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary mb-2">
+                            Submit Result
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="container-fluid delete_results_list">
+                <h2>List of Results</h2>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="results_list">
+                            <h5 class="card-title">01/01/2025</h5>
+                            <div class="container-fluid d-flex gap-5">
+                                <p class="card-text">Arsenal</p>
+                                <p class="card-text">1</p>
+                                <p class="card-text">3</p>
+                                <p class="card-text">Manchester United</p>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-danger btn-sm">
+                            Delete Result
+                        </button>
+
+                        <!-- <div class="position-absolute" style="right: 1rem">
+                            
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+            integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
