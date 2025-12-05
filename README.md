@@ -12,10 +12,8 @@ account/login page to identify who can delete results
 add chatgpt for fun lol, ai chatbox
 
 now:
-improve delete feature code, to make it more modular
-look at creating more helper functions for reusable stuff, e.g. code for alerts maybe
-also leading teams code shoud be in helper functions
-as well as loading results
+make navbar cover all pages, get them linking up
+documentation for all helper functions?
 
 bugs
 you can select "select a team" on the away team if a home team has been selected

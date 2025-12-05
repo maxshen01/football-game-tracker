@@ -1,5 +1,5 @@
 import { getTeams, createResult } from "./apiHelpers.js";
-import { addTeams } from "./elementLoadingHelpers.js";
+import { addTeams, showToast } from "./elementLoadingHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
@@ -20,7 +20,7 @@ async function initPage() {
         addTeams(teamsList, awayTeamSelection);
     } catch (err) {
         console.log(err);
-        alert("Could not lead teams.");
+        showToast("Could not load the teams", "Error");
     }
 }
 
@@ -89,7 +89,10 @@ async function getNewResult(e) {
         const response = await createResult(newResult);
 
         if (response.ok) {
-            alert("Result Submitted Successfully");
+            showToast(
+                "The result was successfully added to the database!",
+                "Result Added"
+            );
             createResultForm.reset();
 
             // Re-enable all options in both dropdowns
@@ -102,10 +105,10 @@ async function getNewResult(e) {
         } else {
             const errorText = await response.text();
             console.error("Error:", errorText);
-            alert("There was an error with the api request");
+            showToast("There was a network error", "Error");
         }
     } catch (err) {
         console.log(err);
-        alert("There was a network error");
+        showToast("There was a network error", "Error");
     }
 }

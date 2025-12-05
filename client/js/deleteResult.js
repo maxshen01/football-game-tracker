@@ -17,17 +17,22 @@ deleteTeamForm.addEventListener("submit", loadResults);
 resultsListHtml.addEventListener("click", confirmDeletion);
 deleteModalBtn.addEventListener("click", deleteResult);
 rejectModalBtn.addEventListener("click", resetResultId);
+deleteModal.addEventListener("hidden.bs.modal", resetResultId);
 
 let resultId = null;
+let confirmDeleteModal = null;
 
 async function initPage() {
+    //load modal for future use
+    confirmDeleteModal = new bootstrap.Modal(deleteModal);
+
     try {
         const teamsList = await getTeams();
 
         addTeams(teamsList, deleteTeamList);
     } catch (err) {
         console.log(err);
-        alert("Could not lead teams.");
+        showToast("Could not load teams", "Error");
     }
 }
 
@@ -42,22 +47,33 @@ async function loadResults(e) {
 
 //Add the results
 async function addResults(team_id) {
-    const teamResults = await getResults(team_id);
-    const teamsList = await getTeams();
+    try {
+        const teamResults = await getResults(team_id);
+        const teamsList = await getTeams();
 
-    const teamNameMap = Object.fromEntries(
-        teamsList.map((teamsList) => [teamsList.team_id, teamsList.team_name])
-    );
+        const teamNameMap = Object.fromEntries(
+            teamsList.map((teamsList) => [
+                teamsList.team_id,
+                teamsList.team_name,
+            ])
+        );
 
-    //iterate through each result
-    for (let i = 0; i < teamResults.length; i++) {
-        const result = teamResults[i];
+        //iterate through each result
+        for (let i = 0; i < teamResults.length; i++) {
+            const result = teamResults[i];
 
-        const resultCard = renderResultCard(result, teamNameMap, {
-            addButton: true,
-        });
+            const resultCard = renderResultCard(result, teamNameMap, {
+                addButton: true,
+            });
 
-        resultsListHtml.appendChild(resultCard);
+            resultsListHtml.appendChild(resultCard);
+        }
+    } catch (err) {
+        console.log(err);
+        showToast(
+            "There was a network error getting the results",
+            "Network Error"
+        );
     }
 }
 
@@ -67,14 +83,18 @@ async function confirmDeletion(event) {
     if (target.matches("button") && target.value) {
         resultId = target.value;
 
-        const modal = new bootstrap.Modal(deleteModal);
-        modal.show();
+        confirmDeleteModal.show();
     }
 }
 
 async function deleteResult() {
-    if (resultId) {
-        deleteResultApi(resultId);
+    if (!resultId) {
+        showToast("No item selected for deletion.", "Cannot Delete");
+        return;
+    }
+
+    try {
+        await deleteResultApi(resultId);
         resultId = null;
 
         showToast("The delete was successful!", "Delete Successful", "error");
@@ -85,13 +105,16 @@ async function deleteResult() {
             target: deleteTeamForm,
         };
 
-        //timeout needed as get request will get old data if not
+        //timeout needed as get request will get old unupdated data if not
         setTimeout(function () {
             loadResults(mockEvent);
         }, 100);
+    } catch (err) {
+        console.log(err);
+        showToast("Failed to delete item. Please try again.", "Error");
+    } finally {
+        confirmDeleteModal.hide();
     }
-
-    bootstrap.Modal.getInstance(deleteModal).hide();
 }
 
 function resetResultId() {
