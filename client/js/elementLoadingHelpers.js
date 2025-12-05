@@ -1,3 +1,16 @@
+/**
+ * Populates a <select> element with team options from a provided list.
+ * Clears existing content, adds a placeholder, then appends each team as an <option>.
+ *
+ * @param {Array<{ team_id: string|number, team_name: string }>} teamsList - Array of team objects with team_id and team_name
+ * @param {HTMLDivElement} listInsertPoint - The <div> DOM element to populate
+ *
+ * @example
+ * addTeams(
+ *   [{ team_id: 1, team_name: "Lions" }, { team_id: 2, team_name: "Tigers" }],
+ *   document.getElementById("teamSelect")
+ * );
+ */
 export function addTeams(teamsList, listInsertPoint) {
     // Clear existing options
     listInsertPoint.innerHTML = "";
@@ -27,6 +40,41 @@ export function addTeams(teamsList, listInsertPoint) {
     }
 }
 
+/**
+ * Renders a result card DOM element displaying match details between two teams.
+ * Includes team names (resolved via teamNameMap), scores, formatted date, and an optional delete button.
+ *
+ * @param {{
+ *   result_id: string|number,
+ *   result_date: string|Date,
+ *   home_team_id: string|number,
+ *   away_team_id: string|number,
+ *   home_team_goals: number,
+ *   away_team_goals: number
+ * }} result - The match result object containing all game details
+ *
+ * @param {Object.<string, string>} teamNameMap - Object mapping team IDs to team names (e.g., { '1': 'Lions', '2': 'Tigers' })
+ *
+ * @param {boolean} [addButton=false] - If true, includes a "Delete Result" button with the result_id as value
+ *
+ * @returns {HTMLDivElement} A fully constructed card element ready to be appended to the DOM
+ *
+ * @example
+ * const teamNameMap = { '1': 'Lions', '2': 'Tigers' };
+ * const card = renderResultCard(
+ *   {
+ *     result_id: 101,
+ *     result_date: '2025-04-01',
+ *     home_team_id: '1',
+ *     away_team_id: '2',
+ *     home_team_goals: 3,
+ *     away_team_goals: 1
+ *   },
+ *   teamNameMap,
+ *   true
+ * );
+ * document.getElementById('resultsContainer').appendChild(card);
+ */
 export function renderResultCard(result, teamNameMap, addButton = false) {
     const card = document.createElement("div");
     card.className = "card";
@@ -58,6 +106,18 @@ export function renderResultCard(result, teamNameMap, addButton = false) {
     return card;
 }
 
+/**
+ * Formats a date string into a human-readable, comma-free UK date format.
+ * Converts the input to a Date object and formats it as: "Weekday Day Month Year"
+ * (e.g., "Monday 1 April 2025").
+ *
+ * @param {string|Date} dateString - The date to format, in any format recognised by `new Date()`
+ *
+ * @returns {string} Formatted date string without commas (e.g., "Monday 1 April 2025")
+ *
+ * @example
+ * formatDate("2025-04-01"); // Returns "Tuesday 1 April 2025"
+ */
 function formatDate(dateString) {
     const date = new Date(dateString);
 
@@ -73,6 +133,17 @@ function formatDate(dateString) {
     return dateDisp;
 }
 
+/**
+ * Displays a toast notification at the bottom-right of the screen using Bootstrap 5.
+ * Dynamically creates a toast container if one doesn't exist, and automatically removes
+ * the toast from the DOM after it hides.
+ *
+ * @param {string} message - The main content text to display in the toast body
+ * @param {string} title - The title/header text for the toast
+ *
+ * @example
+ * showToast("Item saved successfully!", "Success");
+ */
 export function showToast(message, title) {
     // Create toast element
     const toastEl = document.createElement("div");
