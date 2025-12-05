@@ -33,3 +33,21 @@ body {
 .form-control {
     flex: 0 0 70%;
 }
+
+.delete_results_list .card-body{
+    display: flex;
+    justify-content: center;
+}
+
+.delete_results_list .results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.delete_results_list .btn {
+    position: absolute;
+    right: 1rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}

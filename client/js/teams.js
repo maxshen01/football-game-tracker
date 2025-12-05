@@ -1,4 +1,5 @@
 import { getTeamName, getTeams, getResults } from "./apiHelpers.js";
+import { renderResultCard, showToast } from "./elementLoadingHelpers.js";
 
 const titleArea = document.querySelector(".titleArea");
 const description = document.querySelector(".team_description");
@@ -25,78 +26,57 @@ function initPage() {
 
 //Add the title
 async function addTitle(team_id) {
-    const title = document.createElement("h1");
-    const teamName = await getTeamName(team_id);
+    try {
+        const title = document.createElement("h1");
+        const teamName = await getTeamName(team_id);
 
-    title.textContent = teamName.team_name;
-    titleArea.appendChild(title);
+        title.textContent = teamName.team_name;
+        titleArea.appendChild(title);
+    } catch (err) {
+        console.log(err);
+        showToast("There was a network error", "Error");
+    }
 }
 
 // Add the image
 async function addImage(team_id) {
-    const imageHtml = document.createElement("img");
-    const teamName = await getTeamName(team_id);
+    try {
+        const imageHtml = document.createElement("img");
+        const teamName = await getTeamName(team_id);
 
-    imageHtml.src = `../assets/team_images/${team_id}.jpg`;
-    imageHtml.alt = teamName.team_name;
+        imageHtml.src = `../assets/team_images/${team_id}.jpg`;
+        imageHtml.alt = teamName.team_name;
 
-    description.appendChild(imageHtml);
+        description.appendChild(imageHtml);
+    } catch (err) {
+        console.log(err);
+        showToast("There was a network error", "Error");
+    }
 }
 
 //Add the results
 async function addResults(team_id) {
-    const teamResults = await getResults(team_id);
-    const teamsList = await getTeams();
+    try {
+        const teamResults = await getResults(team_id);
+        const teamsList = await getTeams();
 
-    const teamNameMap = Object.fromEntries(
-        teamsList.map((teamsList) => [teamsList.team_id, teamsList.team_name])
-    );
+        const teamNameMap = Object.fromEntries(
+            teamsList.map((teamsList) => [
+                teamsList.team_id,
+                teamsList.team_name,
+            ])
+        );
 
-    //iterate through each result
-    for (let i = 0; i < teamResults.length; i++) {
-        const result = teamResults[i];
+        //iterate through each result
+        for (let i = 0; i < teamResults.length; i++) {
+            const result = teamResults[i];
 
-        const resultCard = renderResultCard(result, teamNameMap);
+            const resultCard = renderResultCard(result, teamNameMap);
 
-        resultsListHtml.appendChild(resultCard);
+            resultsListHtml.appendChild(resultCard);
+        }
+    } catch (err) {
+        console.log(err);
+        showToast("There was a network error", "Error");
     }
-}
-
-//helper functions
-function renderResultCard(result, teamNameMap) {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const dateDisp = formatDate(result.result_date);
-
-    card.innerHTML = `
-                    <div class="card-body">
-                        <h5 class="card-title ">${dateDisp}</h5>
-                        <div class="container-fluid d-flex gap-5">
-                        <p class="card-text">${
-                            teamNameMap[result.home_team_id]
-                        }</p>
-                        <p class="card-text">${result.home_team_goals}</p>
-                        <p class="card-text">${result.away_team_goals}</p>
-                        <p class="card-text">${
-                            teamNameMap[result.away_team_id]
-                        }</p>
-                    </div>
-    `;
-    return card;
-}
-
-function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    const dateDisp = date
-        .toLocaleDateString("en-GB", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-        })
-        .replace(",", "");
-
-    return dateDisp;
 }
