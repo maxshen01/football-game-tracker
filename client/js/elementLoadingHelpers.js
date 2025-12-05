@@ -72,3 +72,54 @@ function formatDate(dateString) {
 
     return dateDisp;
 }
+
+export function showToast(message, title) {
+    // Create toast element
+    const toastEl = document.createElement("div");
+    toastEl.className = `toast align-items-center`;
+    toastEl.role = "alert";
+    toastEl.ariaLive = "assertive";
+    toastEl.ariaAtomic = "true";
+
+    toastEl.innerHTML = `
+        <div class="toast-header">
+            <strong class="me-auto">${title}</strong>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div class="toast-body">
+            ${message}
+        </div>
+    `;
+
+    // Create toast wrapper if it doesn't exist
+    let toastContainer = document.getElementById("toast-container");
+    if (!toastContainer) {
+        toastContainer = document.createElement("div");
+        toastContainer.id = "toast-container";
+        toastContainer.className =
+            "toast-container position-fixed bottom-0 end-0 p-3";
+        toastContainer.style.zIndex = "1100";
+        document.body.appendChild(toastContainer);
+    }
+
+    // Add toast and show it
+    toastContainer.appendChild(toastEl);
+
+    // Initialise and show with Bootstrap
+    const bootstrapToast = new bootstrap.Toast(toastEl, {
+        autohide: true,
+        delay: 3000,
+    });
+
+    bootstrapToast.show();
+
+    // Optional: Remove from DOM after animation completes
+    toastEl.addEventListener("hidden.bs.toast", () => {
+        toastEl.remove();
+    });
+}

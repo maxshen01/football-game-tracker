@@ -1,5 +1,9 @@
 import { getTeams, getResults, deleteResultApi } from "./apiHelpers.js";
-import { addTeams, renderResultCard } from "./domLoadingHelpers.js";
+import {
+    addTeams,
+    renderResultCard,
+    showToast,
+} from "./elementLoadingHelpers.js";
 
 const deleteTeamList = document.querySelector("#deleteTeam");
 const deleteTeamForm = document.querySelector(".deleteResultForm");
@@ -7,7 +11,6 @@ const resultsListHtml = document.querySelector(".delete_results_list");
 const deleteModal = document.querySelector("#confirmDeleteModal");
 const deleteModalBtn = document.querySelector("#confirmDeleteBtn");
 const rejectModalBtn = document.querySelector("#rejectDeleteBtn");
-const deleteSuccessToast = document.querySelector("#deleteSuccessToast");
 
 document.addEventListener("DOMContentLoaded", initPage);
 deleteTeamForm.addEventListener("submit", loadResults);
@@ -74,14 +77,7 @@ async function deleteResult() {
         deleteResultApi(resultId);
         resultId = null;
 
-        const newToast = bootstrap.Toast.getOrCreateInstance(
-            deleteSuccessToast,
-            {
-                delay: 3000, // Auto-dismiss after 3 seconds
-            }
-        );
-
-        newToast.show();
+        showToast("The delete was successful!", "Delete Successful", "error");
 
         //mock input for results
         const mockEvent = {

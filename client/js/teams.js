@@ -1,5 +1,5 @@
 import { getTeamName, getTeams, getResults } from "./apiHelpers.js";
-import { renderResultCard } from "./domLoadingHelpers.js";
+import { renderResultCard } from "./elementLoadingHelpers.js";
 
 const titleArea = document.querySelector(".titleArea");
 const description = document.querySelector(".team_description");

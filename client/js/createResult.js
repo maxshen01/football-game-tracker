@@ -1,5 +1,5 @@
 import { getTeams, createResult } from "./apiHelpers.js";
-import { addTeams } from "./domLoadingHelpers.js";
+import { addTeams } from "./elementLoadingHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
