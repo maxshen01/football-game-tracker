@@ -1,4 +1,5 @@
 import { getTeamName, getTeams, getResults } from "./apiHelpers.js";
+import { renderResultCard } from "./domLoadingHelpers.js";
 
 const titleArea = document.querySelector(".titleArea");
 const description = document.querySelector(".team_description");
@@ -60,43 +61,4 @@ async function addResults(team_id) {
 
         resultsListHtml.appendChild(resultCard);
     }
-}
-
-//helper functions
-function renderResultCard(result, teamNameMap) {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const dateDisp = formatDate(result.result_date);
-
-    card.innerHTML = `
-                    <div class="card-body">
-                        <h5 class="card-title ">${dateDisp}</h5>
-                        <div class="container-fluid d-flex gap-5">
-                        <p class="card-text">${
-                            teamNameMap[result.home_team_id]
-                        }</p>
-                        <p class="card-text">${result.home_team_goals}</p>
-                        <p class="card-text">${result.away_team_goals}</p>
-                        <p class="card-text">${
-                            teamNameMap[result.away_team_id]
-                        }</p>
-                    </div>
-    `;
-    return card;
-}
-
-function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    const dateDisp = date
-        .toLocaleDateString("en-GB", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-        })
-        .replace(",", "");
-
-    return dateDisp;
 }

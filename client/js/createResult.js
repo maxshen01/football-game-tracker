@@ -1,4 +1,5 @@
 import { getTeams, createResult } from "./apiHelpers.js";
+import { addTeams } from "./domLoadingHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
@@ -15,48 +16,11 @@ async function initPage() {
     try {
         const teamsList = await getTeams();
 
-        addTeams(teamsList);
+        addTeams(teamsList, homeTeamSelection);
+        addTeams(teamsList, awayTeamSelection);
     } catch (err) {
         console.log(err);
         alert("Could not lead teams.");
-    }
-}
-
-//add teams to the page, part of init page
-async function addTeams(teamsList) {
-    // Clear existing options
-    homeTeamSelection.innerHTML = "";
-    awayTeamSelection.innerHTML = "";
-
-    // Add placeholder to both
-    const placeholder = (label) => {
-        const opt = document.createElement("option");
-        opt.value = "";
-        opt.disabled = true;
-        opt.selected = true;
-        opt.className = "placeholder";
-        opt.textContent = label;
-        return opt;
-    };
-
-    homeTeamSelection.appendChild(placeholder("Select a team"));
-    awayTeamSelection.appendChild(placeholder("Select a team"));
-
-    //Add new teams
-    for (let i = 0; i < teamsList.length; i++) {
-        const teamObject = teamsList[i];
-
-        const homeOption = document.createElement("option");
-        homeOption.textContent = teamObject.team_name;
-        homeOption.value = teamObject.team_id;
-
-        homeTeamSelection.appendChild(homeOption);
-
-        const awayOption = document.createElement("option");
-        awayOption.textContent = teamObject.team_name;
-        awayOption.value = teamObject.team_id;
-
-        awayTeamSelection.appendChild(awayOption);
     }
 }
 

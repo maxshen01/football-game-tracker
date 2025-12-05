@@ -1,4 +1,5 @@
 import { getTeams, getResults, deleteResultApi } from "./apiHelpers.js";
+import { addTeams, renderResultCard } from "./domLoadingHelpers.js";
 
 const deleteTeamList = document.querySelector("#deleteTeam");
 const deleteTeamForm = document.querySelector(".deleteResultForm");
@@ -20,39 +21,10 @@ async function initPage() {
     try {
         const teamsList = await getTeams();
 
-        addTeams(teamsList);
+        addTeams(teamsList, deleteTeamList);
     } catch (err) {
         console.log(err);
         alert("Could not lead teams.");
-    }
-}
-
-async function addTeams(teamsList) {
-    // Clear existing options
-    deleteTeamList.innerHTML = "";
-
-    // Add placeholder to both
-    const placeholder = (label) => {
-        const opt = document.createElement("option");
-        opt.value = "";
-        opt.disabled = true;
-        opt.selected = true;
-        opt.className = "placeholder";
-        opt.textContent = label;
-        return opt;
-    };
-
-    deleteTeamList.appendChild(placeholder("Select a team"));
-
-    //Add new teams
-    for (let i = 0; i < teamsList.length; i++) {
-        const teamObject = teamsList[i];
-
-        const teamOption = document.createElement("option");
-        teamOption.textContent = teamObject.team_name;
-        teamOption.value = teamObject.team_id;
-
-        deleteTeamList.appendChild(teamOption);
     }
 }
 
@@ -78,54 +50,12 @@ async function addResults(team_id) {
     for (let i = 0; i < teamResults.length; i++) {
         const result = teamResults[i];
 
-        const resultCard = renderResultCard(result, teamNameMap);
+        const resultCard = renderResultCard(result, teamNameMap, {
+            addButton: true,
+        });
 
         resultsListHtml.appendChild(resultCard);
     }
-}
-
-//helper functions
-function renderResultCard(result, teamNameMap) {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const dateDisp = formatDate(result.result_date);
-
-    card.innerHTML = `
-    <div class="card-body">
-        <div class="Results">
-            <h5 class="card-title">${dateDisp}</h5>
-            <div class="container-fluid d-flex gap-5">
-                <p class="card-text">${teamNameMap[result.home_team_id]}</p>
-                <p class="card-text">${result.home_team_goals}</p>
-                <p class="card-text">${result.away_team_goals}</p>
-                <p class="card-text">${teamNameMap[result.away_team_id]}</p>
-            </div>
-        </div>
-            <button type="button" class="btn btn-danger btn-sm" value=${
-                result.result_id
-            }>
-                Delete Result
-            </button>
-        </div>
-    </div>
-    `;
-    return card;
-}
-
-function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    const dateDisp = date
-        .toLocaleDateString("en-GB", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-        })
-        .replace(",", "");
-
-    return dateDisp;
 }
 
 async function confirmDeletion(event) {
