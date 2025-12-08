@@ -1,9 +1,21 @@
 import { getLeagueTable } from "./apiHelpers.js";
-import { showToast } from "./elementLoadingHelpers.js";
+import { loadNavbar, showToast } from "./elementLoadingHelpers.js";
 
 const leagueTableHtml = document.querySelector(".league-table");
 
 document.addEventListener("DOMContentLoaded", fillLeagueTable);
+document.addEventListener("DOMContentLoaded", initNavbar);
+
+async function initNavbar() {
+    try {
+        // console.log("function hit");
+        await loadNavbar();
+        // console.log("function hit");
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
+    }
+}
 
 //fills the league table
 async function fillLeagueTable(e) {

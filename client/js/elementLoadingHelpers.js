@@ -194,3 +194,23 @@ export function showToast(message, title) {
         toastEl.remove();
     });
 }
+
+export async function loadNavbar() {
+    const navbarContainer = document.querySelector(".navbar");
+
+    if (!navbarContainer) return;
+
+    try {
+        const response = await fetch("/client/partials/navbar.html");
+
+        if (!response.ok)
+            throw new Error(
+                `Failed to load: ${response.status} ${response.statusText}`
+            );
+
+        const data = await response.text();
+        navbarContainer.innerHTML = data;
+    } catch (err) {
+        console.error("Failed to load navbar:", err);
+    }
+}

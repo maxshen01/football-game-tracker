@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Premier League Table</title>
+        <title>League Table</title>
         <link rel="icon" href="./assets/prem_favicon.ico" />
         <script defer type="module" src="./js/index.js"></script>
         <link rel="stylesheet" href="./css/main.css" />
@@ -16,19 +16,10 @@
         />
     </head>
     <body>
-        <!-- <header>
-        <h1>Premier League Table</h1>
-
-        <nav class="container justify-contents-around">
-            <a class="navbar-brand" href="create_result.html">Add result</a></div>
-            <a class="navbar-brand" href="delete_result.html">Delete result</a></div>
-        </nav>
-    </header> -->
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-
+        <header>
+            <h1>Make Man United Great Again</h1>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <!-- <div class="container-fluid">
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -46,67 +37,56 @@
                             <a
                                 class="nav-link active"
                                 aria-current="page"
-                                href="#"
+                                href="./index.html"
                                 >League Table</a
                             >
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Add Result</a>
+                            <a class="nav-link" href="./pages/createResult.html"
+                                >Add Result</a
+                            >
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Delete Result</a>
+                            <a class="nav-link" href="./pages/deleteResult.html"
+                                >Delete Result</a
+                            >
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Account</a>
+                            <a
+                                class="nav-link disabled"
+                                aria-disabled="true"
+                                href="#"
+                                >Account</a
+                            >
                         </li>
                     </ul>
                 </div>
+            </div> -->
+            </nav>
+        </header>
+
+        <main>
+            <h2>Premier League Table</h2>
+            <div class="container my-5 px-5 prem-table">
+                <table class="table table-light table-striped my_table">
+                    <thead>
+                        <tr class="table-warning">
+                            <th scope="col">Team Name</th>
+                            <th scope="col">Played</th>
+                            <th scope="col">Won</th>
+                            <th scope="col">Drawn</th>
+                            <th scope="col">Lost</th>
+                            <th scope="col">Goals For</th>
+                            <th scope="col">Goals Against</th>
+                            <th scope="col">Goal Difference</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="league-table"></tbody>
+                </table>
             </div>
-        </nav>
-
-        <div class="container my-5 px-5 prem-table">
-            <table class="table table-light table-striped my_table">
-                <thead>
-                    <tr class="table-warning">
-                        <th scope="col">Team Name</th>
-                        <th scope="col">Played</th>
-                        <th scope="col">Won</th>
-                        <th scope="col">Drawn</th>
-                        <th scope="col">Lost</th>
-                        <th scope="col">Goals For</th>
-                        <th scope="col">Goals Against</th>
-                        <th scope="col">Goal Difference</th>
-                        <th scope="col">Points</th>
-                    </tr>
-                </thead>
-
-                <tbody class="league-table">
-                    <!-- <tr>
-                    <th scope="row">Arsenal</th>
-                    <td>6</td>
-                    <td>5</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>13</td>
-                    <td>4</td>
-                    <td>9</td>
-                    <td>16</td>
-                </tr>
-
-                <tr>
-                    <th scope="row">Manchester United</th>
-                    <td>6</td>
-                    <td>6</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>15</td>
-                    <td>3</td>
-                    <td>12</td>
-                    <td>18</td>
-                </tr> -->
-                </tbody>
-            </table>
-        </div>
+        </main>
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

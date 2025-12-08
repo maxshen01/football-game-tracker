@@ -1,5 +1,5 @@
 import { getTeams, createResult } from "./apiHelpers.js";
-import { addTeams, showToast } from "./elementLoadingHelpers.js";
+import { addTeams, showToast, loadNavbar } from "./elementLoadingHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
@@ -7,6 +7,7 @@ const createResultForm = document.querySelector(".createResultForm");
 
 //event listeners
 document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initNavbar);
 createResultForm.addEventListener("submit", getNewResult);
 homeTeamSelection.addEventListener("change", disableSameTeam);
 awayTeamSelection.addEventListener("change", disableSameTeam);
@@ -21,6 +22,15 @@ async function initPage() {
     } catch (err) {
         console.log(err);
         showToast("Could not load the teams", "Error");
+    }
+}
+
+async function initNavbar() {
+    try {
+        await loadNavbar();
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
     }
 }
 

@@ -3,6 +3,7 @@ import {
     addTeams,
     renderResultCard,
     showToast,
+    loadNavbar,
 } from "./elementLoadingHelpers.js";
 
 const deleteTeamList = document.querySelector("#deleteTeam");
@@ -13,6 +14,7 @@ const deleteModalBtn = document.querySelector("#confirmDeleteBtn");
 const rejectModalBtn = document.querySelector("#rejectDeleteBtn");
 
 document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initNavbar);
 deleteTeamForm.addEventListener("submit", loadResults);
 resultsListHtml.addEventListener("click", confirmDeletion);
 deleteModalBtn.addEventListener("click", deleteResult);
@@ -33,6 +35,15 @@ async function initPage() {
     } catch (err) {
         console.log(err);
         showToast("Could not load teams", "Error");
+    }
+}
+
+async function initNavbar() {
+    try {
+        await loadNavbar();
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
     }
 }
 
