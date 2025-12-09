@@ -210,7 +210,32 @@ export async function loadNavbar() {
 
         const data = await response.text();
         navbarContainer.innerHTML = data;
+
+        //change active bar
+        changeActiveTab();
     } catch (err) {
         console.error("Failed to load navbar:", err);
     }
+}
+
+function changeActiveTab() {
+    //get the name of the script
+    const path = window.location.pathname;
+    const page = path.split("/").pop();
+
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((link) => {
+        // Remove 'active' class from all links
+        link.classList.remove("active");
+
+        // Remove aria-current from all
+        link.removeAttribute("aria-current");
+
+        // If the link's href matches the current page, make it active
+        if (link.getAttribute("href").includes(page)) {
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
+        }
+    });
 }

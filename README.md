@@ -17,7 +17,4 @@ documentation for all helper functions?
 
 bugs
 you can select "select a team" on the away team if a home team has been selected
-
-test
-
-test 2
+navbar becomes black when screen is small.

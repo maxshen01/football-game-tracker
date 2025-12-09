@@ -5,9 +5,7 @@
 
 header {
   width: 100%;
-  background-color: red;
-  margin-top: 2%;
-  margin-bottom: 1%;
+  margin-bottom: 30px;
 }
 
 .header-container {
@@ -17,6 +15,7 @@ header {
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: 15px;
 }
 
 main {
@@ -24,6 +23,6 @@ main {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
+  padding-left: 24px;
   padding-right: 1rem;
 }

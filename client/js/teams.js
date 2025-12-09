@@ -5,7 +5,7 @@ import {
     loadNavbar,
 } from "./elementLoadingHelpers.js";
 
-const titleArea = document.querySelector(".titleArea");
+const teamHeader = document.querySelector(".team-header");
 const description = document.querySelector(".team_description");
 const resultsListHtml = document.querySelector(".results_list");
 
@@ -45,7 +45,7 @@ async function addTitle(team_id) {
         const teamName = await getTeamName(team_id);
 
         title.textContent = teamName.team_name;
-        titleArea.appendChild(title);
+        teamHeader.appendChild(title);
     } catch (err) {
         console.log(err);
         showToast("There was a network error", "Error");
