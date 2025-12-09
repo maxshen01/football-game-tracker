@@ -6,7 +6,7 @@ import {
 } from "./elementLoadingHelpers.js";
 
 const teamHeader = document.querySelector(".team-header");
-const description = document.querySelector(".team_description");
+const imgLocation = document.querySelector(".img-location");
 const resultsListHtml = document.querySelector(".results_list");
 
 document.addEventListener("DOMContentLoaded", initPage);
@@ -61,7 +61,7 @@ async function addImage(team_id) {
         imageHtml.src = `../assets/team_images/${team_id}.jpg`;
         imageHtml.alt = teamName.team_name;
 
-        description.appendChild(imageHtml);
+        imgLocation.appendChild(imageHtml);
     } catch (err) {
         console.log(err);
         showToast("There was a network error", "Error");

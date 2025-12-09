@@ -16,3 +16,8 @@
 .form-control {
     flex: 0 0 70%;
 }
+
+.form-group {
+    border-radius: 10px;
+    margin: 2rem 0;
+}

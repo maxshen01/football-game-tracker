@@ -8,7 +8,8 @@ import {
 
 const deleteTeamList = document.querySelector("#deleteTeam");
 const deleteTeamForm = document.querySelector(".deleteResultForm");
-const resultsListHtml = document.querySelector(".delete_results_list");
+const resultsListDiv = document.querySelector(".delete_results_list");
+const resultsListHtml = document.querySelector(".results_list");
 const deleteModal = document.querySelector("#confirmDeleteModal");
 const deleteModalBtn = document.querySelector("#confirmDeleteBtn");
 const rejectModalBtn = document.querySelector("#rejectDeleteBtn");
@@ -49,7 +50,9 @@ async function initNavbar() {
 
 async function loadResults(e) {
     e.preventDefault();
-    resultsListHtml.innerHTML = "<h2>List of Results</h2>";
+
+    resultsListHtml.innerHTML = "";
+    resultsListDiv.style.display = "block";
 
     const teamId = e.target[0].value;
 

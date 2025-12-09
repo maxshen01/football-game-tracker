@@ -90,7 +90,7 @@ export function renderResultCard(result, teamNameMap, addButton = false) {
 
     card.innerHTML = `
     <div class="card-body">
-        <div class="Results">
+        <div class="results">
             <h5 class="card-title">${dateDisp}</h5>
             <div class="container-fluid d-flex gap-5">
                 <p class="card-text">${teamNameMap[result.home_team_id]}</p>

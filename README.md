@@ -1,6 +1,7 @@
 future:
 add a switch button for home and away
 order the league table by goal difference
+order results by date, currently only ordered by result_id
 let the delete result page select 2 teams
 
 nice to haves:

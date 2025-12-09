@@ -23,9 +23,10 @@ header h1 {
     color: white;
 }
 
-.nav-link.active,
-.nav-link:hover {
-    color: white !important;
+.header-nav .nav-link.active,
+.header-nav .nav-link:hover,
+.header-nav .nav-link:focus {
+    color: white;
     border-bottom: 2px solid yellow;
 }
 
