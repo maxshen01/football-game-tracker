@@ -38,7 +38,7 @@
                 <div class="form-group bg-body-secondary">
                     <div class="form-row">
                         <div class="form-label">
-                            <label for="date" class="form label"
+                            <label for="date" class="form-label"
                                 >Select a date:</label
                             >
                         </div>
@@ -47,7 +47,6 @@
                                 type="date"
                                 class="form-control"
                                 id="resultDate"
-                                value="2025-11-28"
                                 required
                             />
                         </div>
@@ -55,27 +54,47 @@
 
                     <div class="form-row">
                         <div class="form-column">
-                            <label for="homeTeamName">Home team:</label>
+                            <label for="homeTeamName" class="form-label"
+                                >Home team:</label
+                            >
                             <select
-                                class="form-control"
+                                class="form-select"
                                 id="homeTeamName"
                                 name="homeTeamName"
                                 required
                             ></select>
-                            <label for="homeTeamGoals">Home Team Goals:</label>
-                            <input type="number" id="homeTeamGoals" required />
+                            <label for="homeTeamGoals" class="form-label"
+                                >Home Team Goals:</label
+                            >
+                            <input
+                                type="number"
+                                id="homeTeamGoals"
+                                class="form-control"
+                                value="0"
+                                required
+                            />
                         </div>
 
                         <div class="form-column">
-                            <label for="awayTeamName">Away team:</label>
+                            <label for="awayTeamName" class="form-label"
+                                >Away team:</label
+                            >
                             <select
-                                class="form-control"
+                                class="form-select"
                                 id="awayTeamName"
                                 name="awayTeamName"
                                 required
                             ></select>
-                            <label for="awayTeamGoals">Away Team Goals:</label>
-                            <input type="number" id="awayTeamGoals" required />
+                            <label for="awayTeamGoals" class="form-label"
+                                >Away Team Goals:</label
+                            >
+                            <input
+                                type="number"
+                                id="awayTeamGoals"
+                                class="form-control"
+                                value="0"
+                                required
+                            />
                         </div>
                     </div>
 

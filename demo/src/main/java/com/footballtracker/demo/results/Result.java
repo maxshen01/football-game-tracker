@@ -29,7 +29,7 @@ public class Result {
     @Min(value = 0, message = "goals cannot be negative")
     private int away_team_goals;
 
-    @Past(message = "The match date must be in the past")
+    @PastOrPresent(message = "The match date must be in the past")
     private LocalDate result_date;
 
     protected Result() {

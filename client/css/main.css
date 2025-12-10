@@ -2,6 +2,9 @@
 @import 'components/table.css';
 @import 'components/nav.css';
 @import 'components/results_list.css';
+@import 'pages/createResult.css';
+@import 'pages/deleteResult.css';
+@import 'pages/team.css';
 
 header {
   width: 100%;

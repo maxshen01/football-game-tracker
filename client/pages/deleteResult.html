@@ -42,9 +42,11 @@
                 <div class="form-group bg-body-secondary">
                     <div class="form-row">
                         <div class="form-column">
-                            <label for="deleteTeam">Team 1:</label>
+                            <label for="deleteTeam" class="form-label"
+                                >Team 1:</label
+                            >
                             <select
-                                class="form-control"
+                                class="form-select"
                                 id="deleteTeam"
                                 name="deleteTeam"
                                 required
@@ -71,8 +73,15 @@
                 </div>
             </form>
 
-            <section style="display: none" class="delete_results_list">
+            <section
+                style="display: none"
+                class="delete_results_list results-list-description"
+            >
                 <h2>List of Results</h2>
+                <p>
+                    Every game played by each club is listed below, in reverse
+                    chronological order.
+                </p>
                 <div class="results_list"></div>
             </section>
         </main>

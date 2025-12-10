@@ -1,0 +1,12 @@
+.createResultForm {
+    max-width: 800px; /* Or your table's natural width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 1rem;
+}
+
+#resultDate {
+    width: 200px;
+}
