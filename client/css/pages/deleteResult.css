@@ -7,16 +7,21 @@
   padding-right: 1rem;
 }
 
-.form-row {
+.deleteResultForm .form-row {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 2rem;
 }
 
-.form-column {
+.deleteResultForm .form-column {
     width: 200px;
     display: flex;
     flex-direction: column;
     gap: .7rem;
+}
+
+.deleteResultForm .form-row:last-child {
+    margin-bottom: 0;
+    justify-content: center;
 }

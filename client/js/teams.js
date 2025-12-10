@@ -41,6 +41,19 @@ async function initNavbar() {
 //Add the title
 async function addTitle(team_id) {
     try {
+        //add favicon
+        const faviconContainer = document.createElement("span");
+        faviconContainer.className = "team-page-favicon";
+
+        const favicon = document.createElement("img");
+        favicon.src = `../assets/team_favicons/${team_id}.png`;
+        favicon.className = "club-logo";
+        favicon.alt = "Club badge";
+
+        faviconContainer.appendChild(favicon);
+        teamHeader.appendChild(faviconContainer);
+
+        //add title
         const title = document.createElement("h2");
         const teamName = await getTeamName(team_id);
 

@@ -2,9 +2,15 @@
 @import 'components/table.css';
 @import 'components/nav.css';
 @import 'components/results_list.css';
+@import 'components/favicons.css';
 @import 'pages/createResult.css';
 @import 'pages/deleteResult.css';
 @import 'pages/team.css';
+
+:root {
+  --header-title-bg: RGB( 237, 28, 36);
+  --header-nav-bg: darkblue;
+}
 
 header {
   width: 100%;

@@ -1,16 +1,17 @@
 header h1 {
     font-weight: bold;
+    color: white;
     margin-bottom: 0px;
     padding-left: 8px;
     padding-bottom: 10px;
 }
 
 .header-title {
-    background-color: yellow;
+    background-color: var(--header-title-bg);
 }
 
 .header-nav {
-    background-color: darkblue;
+    background-color: var(--header-nav-bg);
 }
 
 .navbar {
@@ -21,13 +22,15 @@ header h1 {
 .nav-link {
     padding-left: 0px;
     color: white;
+    border-bottom: 4px solid transparent; 
+    transition: border-color 0.2s ease; 
 }
 
 .header-nav .nav-link.active,
 .header-nav .nav-link:hover,
 .header-nav .nav-link:focus {
     color: white;
-    border-bottom: 2px solid yellow;
+    border-bottom: 2px solid var(--header-title-bg);
 }
 
 .nav-link.disabled {
