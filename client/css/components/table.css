@@ -2,3 +2,33 @@
 .my_table th {
     text-align: center;
 }
+
+.prem_table {
+  overflow: hidden;           /* keeps header corners rounded */
+  border-radius: 12px;        /* adjust as you like */
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  margin-bottom: 2rem;
+}
+
+
+.text-start {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    padding-left: 2rem !important;
+}
+
+.text-start .num {
+    width: 2rem;
+}
+
+.text-start a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+.text-start a:hover {
+    color: blue;
+    text-decoration: underline;
+}
