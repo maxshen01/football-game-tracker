@@ -1,0 +1,13 @@
+.favicon-container{
+  display: inline-flex;     /* use flex inside inline container */
+  width: 1.8rem;
+  justify-content: center;  /* center horizontally */
+  align-items: center;        /* reserve horizontal space */
+}
+
+.favicon-container img {
+  width: auto;
+  height: 1.8rem;      /* scale proportionally */
+  display: block;    /* avoids inline whitespace */
+  object-fit: contain;
+}

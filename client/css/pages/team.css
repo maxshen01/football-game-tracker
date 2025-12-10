@@ -24,3 +24,24 @@
 .team-header, .results-list-description {
     margin-bottom: 2rem;
 }
+
+.team-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-header .team-page-favicon {
+  display: inline-flex;     /* use flex inside inline container */
+  width: 3.5rem;
+  justify-content: center;  /* center horizontally */
+  align-items: center;        /* reserve horizontal space */
+}
+
+.team-header .team-page-favicon img {
+  width: auto;
+  height: 3.5rem;      /* scale proportionally */
+  display: block;    /* avoids inline whitespace */
+  object-fit: contain;
+}

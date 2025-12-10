@@ -42,10 +42,22 @@ async function fillLeagueTable(e) {
                     link.href = `pages/team.html?team=${teamStats.team_id}`;
 
                     //create ranking
-                    const rank = document.createElement("p");
+                    const rank = document.createElement("span");
                     rank.textContent = `${i + 1}.`;
                     rank.className = "num";
                     cell.appendChild(rank);
+
+                    //add favicon
+                    const faviconContainer = document.createElement("span");
+                    faviconContainer.className = "favicon-container";
+
+                    const favicon = document.createElement("img");
+                    favicon.src = `./assets/team_favicons/${teamStats.team_id}.png`;
+                    favicon.className = "club-logo";
+                    favicon.alt = value;
+
+                    faviconContainer.appendChild(favicon);
+                    cell.appendChild(faviconContainer);
 
                     cell.appendChild(link);
                     cell.className = "text-start";
