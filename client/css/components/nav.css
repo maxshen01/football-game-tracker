@@ -1,0 +1,35 @@
+header h1 {
+    font-weight: bold;
+    margin-bottom: 0px;
+    padding-left: 8px;
+    padding-bottom: 10px;
+}
+
+.header-title {
+    background-color: yellow;
+}
+
+.header-nav {
+    background-color: darkblue;
+}
+
+.navbar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.nav-link {
+    padding-left: 0px;
+    color: white;
+}
+
+.header-nav .nav-link.active,
+.header-nav .nav-link:hover,
+.header-nav .nav-link:focus {
+    color: white;
+    border-bottom: 2px solid yellow;
+}
+
+.nav-link.disabled {
+    color: grey;
+}

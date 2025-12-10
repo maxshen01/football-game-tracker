@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Delete a Result</title>
 
-        <link rel="stylesheet" href="../css/main.css" />
         <script type="module" src="../js/deleteResult.js"></script>
 
         <link
@@ -14,25 +13,40 @@
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="../css/main.css" />
     </head>
     <body>
         <header>
-            <h1>Delete results</h1>
+            <div class="header-title">
+                <div class="header-container">
+                    <h1>Make United Great Again</h1>
+                </div>
+            </div>
+
+            <div class="header-nav">
+                <div class="header-container">
+                    <nav class="navbar navbar-expand-sm"></nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h2>Delete results</h2>
             <p>
                 This is the page to delete any results. To delete a result,
                 select one of the teams partaking in the result, and select the
                 correct game, then delete it.
             </p>
-        </header>
 
-        <main>
             <form class="deleteResultForm">
-                <div class="form-group bg-body-secondary container">
+                <div class="form-group bg-body-secondary">
                     <div class="form-row">
                         <div class="form-column">
-                            <label for="deleteTeam">Team 1:</label>
+                            <label for="deleteTeam" class="form-label"
+                                >Team 1:</label
+                            >
                             <select
-                                class="form-control"
+                                class="form-select"
                                 id="deleteTeam"
                                 name="deleteTeam"
                                 required
@@ -59,9 +73,17 @@
                 </div>
             </form>
 
-            <div class="container-fluid delete_results_list">
+            <section
+                style="display: none"
+                class="delete_results_list results-list-description"
+            >
                 <h2>List of Results</h2>
-            </div>
+                <p>
+                    Every game played by each club is listed below, in reverse
+                    chronological order.
+                </p>
+                <div class="results_list"></div>
+            </section>
         </main>
 
         <!-- Confirmation Modal -->

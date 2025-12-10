@@ -90,7 +90,7 @@ export function renderResultCard(result, teamNameMap, addButton = false) {
 
     card.innerHTML = `
     <div class="card-body">
-        <div class="Results">
+        <div class="results">
             <h5 class="card-title">${dateDisp}</h5>
             <div class="container-fluid d-flex gap-5">
                 <p class="card-text">${teamNameMap[result.home_team_id]}</p>
@@ -192,5 +192,50 @@ export function showToast(message, title) {
     // Optional: Remove from DOM after animation completes
     toastEl.addEventListener("hidden.bs.toast", () => {
         toastEl.remove();
+    });
+}
+
+export async function loadNavbar() {
+    const navbarContainer = document.querySelector(".navbar");
+
+    if (!navbarContainer) return;
+
+    try {
+        const response = await fetch("/client/partials/navbar.html");
+
+        if (!response.ok)
+            throw new Error(
+                `Failed to load: ${response.status} ${response.statusText}`
+            );
+
+        const data = await response.text();
+        navbarContainer.innerHTML = data;
+
+        //change active bar
+        changeActiveTab();
+    } catch (err) {
+        console.error("Failed to load navbar:", err);
+    }
+}
+
+function changeActiveTab() {
+    //get the name of the script
+    const path = window.location.pathname;
+    const page = path.split("/").pop();
+
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    navLinks.forEach((link) => {
+        // Remove 'active' class from all links
+        link.classList.remove("active");
+
+        // Remove aria-current from all
+        link.removeAttribute("aria-current");
+
+        // If the link's href matches the current page, make it active
+        if (link.getAttribute("href").includes(page)) {
+            link.classList.add("active");
+            link.setAttribute("aria-current", "page");
+        }
     });
 }

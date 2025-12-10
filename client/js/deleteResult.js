@@ -3,16 +3,19 @@ import {
     addTeams,
     renderResultCard,
     showToast,
+    loadNavbar,
 } from "./elementLoadingHelpers.js";
 
 const deleteTeamList = document.querySelector("#deleteTeam");
 const deleteTeamForm = document.querySelector(".deleteResultForm");
-const resultsListHtml = document.querySelector(".delete_results_list");
+const resultsListDiv = document.querySelector(".delete_results_list");
+const resultsListHtml = document.querySelector(".results_list");
 const deleteModal = document.querySelector("#confirmDeleteModal");
 const deleteModalBtn = document.querySelector("#confirmDeleteBtn");
 const rejectModalBtn = document.querySelector("#rejectDeleteBtn");
 
 document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initNavbar);
 deleteTeamForm.addEventListener("submit", loadResults);
 resultsListHtml.addEventListener("click", confirmDeletion);
 deleteModalBtn.addEventListener("click", deleteResult);
@@ -36,9 +39,20 @@ async function initPage() {
     }
 }
 
+async function initNavbar() {
+    try {
+        await loadNavbar();
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
+    }
+}
+
 async function loadResults(e) {
     e.preventDefault();
-    resultsListHtml.innerHTML = "<h2>List of Results</h2>";
+
+    resultsListHtml.innerHTML = "";
+    resultsListDiv.style.display = "block";
 
     const teamId = e.target[0].value;
 

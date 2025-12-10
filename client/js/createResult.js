@@ -1,5 +1,5 @@
 import { getTeams, createResult } from "./apiHelpers.js";
-import { addTeams, showToast } from "./elementLoadingHelpers.js";
+import { addTeams, showToast, loadNavbar } from "./elementLoadingHelpers.js";
 
 const homeTeamSelection = document.querySelector("#homeTeamName");
 const awayTeamSelection = document.querySelector("#awayTeamName");
@@ -7,12 +7,15 @@ const createResultForm = document.querySelector(".createResultForm");
 
 //event listeners
 document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initNavbar);
 createResultForm.addEventListener("submit", getNewResult);
 homeTeamSelection.addEventListener("change", disableSameTeam);
 awayTeamSelection.addEventListener("change", disableSameTeam);
 
 //initialise page
 async function initPage() {
+    createResultForm.reset();
+
     try {
         const teamsList = await getTeams();
 
@@ -21,6 +24,15 @@ async function initPage() {
     } catch (err) {
         console.log(err);
         showToast("Could not load the teams", "Error");
+    }
+}
+
+async function initNavbar() {
+    try {
+        await loadNavbar();
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
     }
 }
 
@@ -58,22 +70,28 @@ async function getNewResult(e) {
 
     // Validate required fields
     if (!resultDate || isNaN(homeTeamId) || isNaN(awayTeamId)) {
-        alert("Please select both teams and a date.");
+        showToast("Please select both teams and a date.", "Input Error");
         return;
     }
 
     if (isNaN(homeGoals) || homeGoals < 0) {
-        alert("Home team goals must be a valid non-negative number.");
+        showToast(
+            "Home team goals must be a valid non-negative number.",
+            "Input Error"
+        );
         return;
     }
 
     if (isNaN(awayGoals) || awayGoals < 0) {
-        alert("Away team goals must be a valid non-negative number.");
+        showToast(
+            "Away team goals must be a valid non-negative number.",
+            "Input Error"
+        );
         return;
     }
 
     if (homeTeamId === awayTeamId) {
-        alert("Home and away teams must be different.");
+        showToast("Home and away teams must be different.", "Input Error");
         return;
     }
 

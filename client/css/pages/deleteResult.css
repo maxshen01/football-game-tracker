@@ -1,0 +1,22 @@
+.deleteResultForm {
+    max-width: 500px; /* Or your table's natural width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 1rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.form-column {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}

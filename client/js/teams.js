@@ -1,11 +1,16 @@
 import { getTeamName, getTeams, getResults } from "./apiHelpers.js";
-import { renderResultCard, showToast } from "./elementLoadingHelpers.js";
+import {
+    renderResultCard,
+    showToast,
+    loadNavbar,
+} from "./elementLoadingHelpers.js";
 
-const titleArea = document.querySelector(".titleArea");
-const description = document.querySelector(".team_description");
+const teamHeader = document.querySelector(".team-header");
+const imgLocation = document.querySelector(".img-location");
 const resultsListHtml = document.querySelector(".results_list");
 
 document.addEventListener("DOMContentLoaded", initPage);
+document.addEventListener("DOMContentLoaded", initNavbar);
 
 //Initialise the page
 function initPage() {
@@ -24,14 +29,23 @@ function initPage() {
     addResults(teamId);
 }
 
+async function initNavbar() {
+    try {
+        await loadNavbar();
+    } catch (err) {
+        console.log(err);
+        showToast("There was an error loading the page", "Error");
+    }
+}
+
 //Add the title
 async function addTitle(team_id) {
     try {
-        const title = document.createElement("h1");
+        const title = document.createElement("h2");
         const teamName = await getTeamName(team_id);
 
         title.textContent = teamName.team_name;
-        titleArea.appendChild(title);
+        teamHeader.appendChild(title);
     } catch (err) {
         console.log(err);
         showToast("There was a network error", "Error");
@@ -47,7 +61,7 @@ async function addImage(team_id) {
         imageHtml.src = `../assets/team_images/${team_id}.jpg`;
         imageHtml.alt = teamName.team_name;
 
-        description.appendChild(imageHtml);
+        imgLocation.appendChild(imageHtml);
     } catch (err) {
         console.log(err);
         showToast("There was a network error", "Error");

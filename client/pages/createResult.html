@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Add a result</title>
 
-        <link rel="stylesheet" href="../css/main.css" />
         <script type="module" src="../js/createResult.js"></script>
 
         <link
@@ -14,65 +13,99 @@
             integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="../css/main.css" />
     </head>
     <body>
         <header>
-            <h1>Add a result</h1>
-            <p>Add any results to the league, to update the league table</p>
-        </header>
-
-        <form class="createResultForm">
-            <div class="form-group bg-body-secondary container">
-                <div class="form-row">
-                    <div class="form-label">
-                        <label for="date" class="form label"
-                            >Select a date:</label
-                        >
-                    </div>
-                    <div class="form-input">
-                        <input
-                            type="date"
-                            class="form-control"
-                            id="resultDate"
-                            value="2025-11-28"
-                            required
-                        />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-column">
-                        <label for="homeTeamName">Home team:</label>
-                        <select
-                            class="form-control"
-                            id="homeTeamName"
-                            name="homeTeamName"
-                            required
-                        ></select>
-                        <label for="homeTeamGoals">Home Team Goals:</label>
-                        <input type="number" id="homeTeamGoals" required />
-                    </div>
-
-                    <div class="form-column">
-                        <label for="awayTeamName">Away team:</label>
-                        <select
-                            class="form-control"
-                            id="awayTeamName"
-                            name="awayTeamName"
-                            required
-                        ></select>
-                        <label for="awayTeamGoals">Away Team Goals:</label>
-                        <input type="number" id="awayTeamGoals" required />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <button type="submit" class="btn btn-primary mb-2">
-                        Submit Result
-                    </button>
+            <div class="header-title">
+                <div class="header-container">
+                    <h1>Make United Great Again</h1>
                 </div>
             </div>
-        </form>
+
+            <div class="header-nav">
+                <div class="header-container">
+                    <nav class="navbar navbar-expand-sm"></nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h2>Add a result</h2>
+            <p>Add any results to the league, to update the league table</p>
+
+            <form class="createResultForm">
+                <div class="form-group bg-body-secondary">
+                    <div class="form-row">
+                        <div class="form-label">
+                            <label for="date" class="form-label"
+                                >Select a date:</label
+                            >
+                        </div>
+                        <div class="form-input">
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="resultDate"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="homeTeamName" class="form-label"
+                                >Home team:</label
+                            >
+                            <select
+                                class="form-select"
+                                id="homeTeamName"
+                                name="homeTeamName"
+                                required
+                            ></select>
+                            <label for="homeTeamGoals" class="form-label"
+                                >Home Team Goals:</label
+                            >
+                            <input
+                                type="number"
+                                id="homeTeamGoals"
+                                class="form-control"
+                                value="0"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-column">
+                            <label for="awayTeamName" class="form-label"
+                                >Away team:</label
+                            >
+                            <select
+                                class="form-select"
+                                id="awayTeamName"
+                                name="awayTeamName"
+                                required
+                            ></select>
+                            <label for="awayTeamGoals" class="form-label"
+                                >Away Team Goals:</label
+                            >
+                            <input
+                                type="number"
+                                id="awayTeamGoals"
+                                class="form-control"
+                                value="0"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary mb-2">
+                            Submit Result
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </main>
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
