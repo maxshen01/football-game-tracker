@@ -1,8 +1,17 @@
 version: '3.9'
 
 services:
+  frontend:
+    container_name: football-games-frontend
+    image: maxshen01/football-games-frontend:0.0.1.RELEASE
+    ports:
+      - "3001:80"
+    networks:
+      - football-games-network
+    depends_on:
+      - backend
   backend:
-    container_name: footabll-games-mvc
+    container_name: football-games-mvc
     image: maxshen01/football-games-mvc:0.0.1.RELEASE
     ports:
       - "8080:8080"
