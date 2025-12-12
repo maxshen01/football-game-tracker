@@ -247,7 +247,6 @@ function changeActiveTab() {
         link.removeAttribute("aria-current");
 
         //match when page is nothing
-        console.log(currentPage);
         if (currentPage === "") {
             if (linkPage === "index.html") {
                 link.classList.add("active");

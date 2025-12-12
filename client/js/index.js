@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", fillLeagueTable);
 document.addEventListener("DOMContentLoaded", initNavbar);
 async function initNavbar() {
     try {
-        // console.log("function hit");
+        console.log(window.location.hostname);
         await loadNavbar();
     } catch (err) {
         console.log(err);
@@ -37,7 +37,7 @@ async function fillLeagueTable(e) {
                     //add link
                     const link = document.createElement("a");
                     link.textContent = value;
-                    link.href = `./client/pages/team.html?team=${teamStats.team_id}`;
+                    link.href = `./pages/team.html?team=${teamStats.team_id}`;
 
                     //create ranking
                     const rank = document.createElement("span");

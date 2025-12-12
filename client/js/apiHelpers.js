@@ -7,7 +7,7 @@ const isLocalHost =
 if (isLocalHost) {
     apiBeginning = "http://localhost:8080";
 } else {
-    apiBeginning = "http://";
+    apiBeginning = `http://${window.location.hostname}:8080`;
 }
 
 /**
