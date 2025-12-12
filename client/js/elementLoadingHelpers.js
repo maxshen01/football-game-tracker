@@ -221,19 +221,39 @@ export async function loadNavbar() {
 function changeActiveTab() {
     //get the name of the script
     const path = window.location.pathname;
-    const page = path.split("/").pop();
+    const currentPage = path.split("/").pop();
 
     const navLinks = document.querySelectorAll(".nav-link");
 
     navLinks.forEach((link) => {
-        // Remove 'active' class from all links
-        link.classList.remove("active");
+        // // Remove 'active' class from all links
+        // link.classList.remove("active");
 
-        // Remove aria-current from all
+        // // Remove aria-current from all
+        // link.removeAttribute("aria-current");
+
+        // // If the link's href matches the current page, make it active
+        // if (link.getAttribute("href").includes(page)) {
+        //     link.classList.add("active");
+        //     link.setAttribute("aria-current", "page");
+        // }
+
+        //extract filename to match
+        const href = link.getAttribute("href");
+        const linkPage = href.split("/").pop();
+
+        // Reset
+        link.classList.remove("active");
         link.removeAttribute("aria-current");
 
-        // If the link's href matches the current page, make it active
-        if (link.getAttribute("href").includes(page)) {
+        //match when page is nothing
+        if (currentPage === "") {
+            if (linkPage === "index.html") {
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
+            }
+        } else if (linkPage === currentPage) {
+            //match exact
             link.classList.add("active");
             link.setAttribute("aria-current", "page");
         }

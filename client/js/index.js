@@ -5,12 +5,10 @@ const leagueTableHtml = document.querySelector(".league-table");
 
 document.addEventListener("DOMContentLoaded", fillLeagueTable);
 document.addEventListener("DOMContentLoaded", initNavbar);
-
 async function initNavbar() {
     try {
-        // console.log("function hit");
+        console.log(window.location.hostname);
         await loadNavbar();
-        // console.log("function hit");
     } catch (err) {
         console.log(err);
         showToast("There was an error loading the page", "Error");
@@ -39,7 +37,7 @@ async function fillLeagueTable(e) {
                     //add link
                     const link = document.createElement("a");
                     link.textContent = value;
-                    link.href = `pages/team.html?team=${teamStats.team_id}`;
+                    link.href = `./pages/team.html?team=${teamStats.team_id}`;
 
                     //create ranking
                     const rank = document.createElement("span");
