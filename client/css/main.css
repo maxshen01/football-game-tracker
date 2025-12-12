@@ -1,0 +1,37 @@
+@import 'components/form.css';
+@import 'components/table.css';
+@import 'components/nav.css';
+@import 'components/results_list.css';
+@import 'components/favicons.css';
+@import 'pages/createResult.css';
+@import 'pages/deleteResult.css';
+@import 'pages/team.css';
+
+:root {
+  --header-title-bg: RGB( 237, 28, 36);
+  --header-nav-bg: darkblue;
+}
+
+header {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.header-container {
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 15px;
+}
+
+main {
+    max-width: 1200px; /* Or your table's natural width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 1rem;
+}

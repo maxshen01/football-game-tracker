@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Delete a Result</title>
+
+        <script type="module" src="../js/deleteResult.js"></script>
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="../css/main.css" />
+    </head>
+    <body>
+        <header>
+            <div class="header-title">
+                <div class="header-container">
+                    <h1>Make United Great Again</h1>
+                </div>
+            </div>
+
+            <div class="header-nav">
+                <div class="header-container">
+                    <nav class="navbar navbar-expand-sm"></nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h2>Delete results</h2>
+            <p>
+                This is the page to delete any results. To delete a result,
+                select one of the teams partaking in the result, and select the
+                correct game, then delete it.
+            </p>
+
+            <form class="deleteResultForm">
+                <div class="form-group bg-body-secondary">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <label for="deleteTeam" class="form-label"
+                                >Team 1:</label
+                            >
+                            <select
+                                class="form-select"
+                                id="deleteTeam"
+                                name="deleteTeam"
+                                required
+                            ></select>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-column">
+                            <label for="awayTeamName">Away team:</label>
+                            <select
+                                class="form-control"
+                                id="awayTeamName"
+                                name="awayTeamName"
+                                required
+                            ></select>
+                        </div>
+                    </div> -->
+
+                    <div class="form-row">
+                        <button type="submit" class="btn btn-primary mb-2">
+                            Submit Result
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <section
+                style="display: none"
+                class="delete_results_list results-list-description"
+            >
+                <h2>List of Results</h2>
+                <p>
+                    Every game played by each club is listed below, in reverse
+                    chronological order.
+                </p>
+                <div class="results_list"></div>
+            </section>
+        </main>
+
+        <!-- Confirmation Modal -->
+        <div class="modal fade" id="confirmDeleteModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this result? This action
+                        cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                            id="rejectDeleteBtn"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            id="confirmDeleteBtn"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
+            integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
