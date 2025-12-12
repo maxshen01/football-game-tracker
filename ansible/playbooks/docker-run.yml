@@ -1,23 +1,27 @@
 - hosts: all
   become: true
   tasks:
+      - name: Copy .env file over
+        copy:
+            src: ../../.env
+            dest: /home/ec2-user/.env
       - name: Copy docker-compose.yml
         copy:
             src: ../../docker-compose.yml
             dest: /home/ec2-user/docker-compose.yml
       - name: Pull docker image of database (always pull latest)
         community.docker.docker_image:
-            name: maxshen01/elf-db:0.0.1.RELEASE
+            name: maxshen01/football-tracker-db:0.0.1.RELEASE
             source: pull
             force_source: true
       - name: Pull docker image of mvc (always pull latest)
         community.docker.docker_image:
-            name: maxshen01/elf-mvc:0.0.1.RELEASE
+            name: maxshen01/football-tracker-mvc:0.0.1.RELEASE
             source: pull
             force_source: true
       - name: Pull docker image of frontend (always pull latest)
         community.docker.docker_image:
-            name: maxshen01/elf-mvc:0.0.1.RELEASE
+            name: maxshen01/football-tracker-frontend:0.0.1.RELEASE
             source: pull
             force_source: true
       - name: Make sure no containers are running
