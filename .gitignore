@@ -1,7 +1,9 @@
 .idea
 .env
+.vscode
 .terraform
 .terraform
 .terraform.*
 *.tfstate
 *.tfstate.*
+GEMINI.md

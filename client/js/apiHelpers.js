@@ -203,7 +203,7 @@ export async function deleteResultApi(resultId) {
 
         const response = await fetch(
             `${apiBeginning}/results/${resultId}`,
-            options
+            options,
         );
 
         if (!response) {

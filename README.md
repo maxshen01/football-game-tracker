@@ -23,4 +23,15 @@ you can select "select a team" on the away team if a home team has been selected
 navbar becomes black when screen is small.
 localhost:3000 no longer shows the index page automatically
 
-test
+API implementation:
+implement functionality to populate the database using an api instead of sample/filler sql.
+The api for use is:
+
+https://api.football-data.org/v4/competitions/PL/matches?season=2025
+
+to get all the matches, past, present and future for this season.
+
+to populate the database, we need to convert the json data:
+
+Json ---> Java object matching Json object ---> Java (springboot) entity matching db --->
+db entries.
