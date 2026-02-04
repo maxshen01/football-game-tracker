@@ -22,3 +22,5 @@ bugs
 you can select "select a team" on the away team if a home team has been selected
 navbar becomes black when screen is small.
 localhost:3000 no longer shows the index page automatically
+
+test
